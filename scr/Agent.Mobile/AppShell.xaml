@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:pages="clr-namespace:Agent.Mobile.Pages"
+       x:Class="Agent.Mobile.AppShell"
+       FlyoutBehavior="Disabled"
+       Shell.NavBarIsVisible="False"
+       Shell.TabBarBackgroundColor="{DynamicResource Surface}"
+       Shell.TabBarForegroundColor="{DynamicResource Accent}"
+       Shell.TabBarUnselectedColor="{DynamicResource TextMuted}">
+    <TabBar>
+        <ShellContent Title="Chat" Icon="chat.svg" ContentTemplate="{DataTemplate pages:ChatPage}" Route="chat" />
+        <ShellContent Title="Agentes" Icon="agents.svg" ContentTemplate="{DataTemplate pages:AgentsPage}" Route="agents" />
+        <ShellContent Title="Projetos" Icon="folder.svg" ContentTemplate="{DataTemplate pages:ProjectsPage}" Route="projects" />
+        <ShellContent Title="Mais" Icon="more.svg" ContentTemplate="{DataTemplate pages:MorePage}" Route="more" />
+        <ShellContent Title="Ajustes" Icon="settings.svg" ContentTemplate="{DataTemplate pages:SettingsPage}" Route="settings" />
+    </TabBar>
+</Shell>
