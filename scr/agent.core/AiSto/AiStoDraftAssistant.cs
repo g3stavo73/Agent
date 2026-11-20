@@ -1,91 +1,148 @@
+using System.Text;
+using System.Text.Json;
+using Agent.Core.Protocol;
+
 namespace Agent.Core.AiSto;
 
-/// <summary>The one-piece brief supplied by the user. Other profile fields are inferred.</summary>
-public sealed record AiStoDraftRequest(string Brief, string? WorkspacePath = null, string? ExistingContext = null);
-
-public sealed record AiStoDraftProfile(
-    string Name,
-    string Description,
-    string Domain,
-    string Objective,
-    string Instructions,
-    string ProjectContext,
-    IReadOnlyList<string> DocumentationSources,
-    string ResponseStyle,
-    bool CanReadRepositories,
-    bool CanWriteRepositories,
-    bool CanBrowseWeb,
-    bool UseSemanticNavigation,
-    bool PreferUpdatedDocumentation,
-    bool ApplyArchitectureRules,
-    IReadOnlyList<string> Assumptions,
-    IReadOnlyList<string> Evidence);
-
-public sealed record AiStoDraftParseResult(bool Success, AiStoDraftProfile? Profile, IReadOnlyList<string> Errors);
-
-public static class AiStoDraftPromptBuilder
+public sealed class AiStoDraftApprovalRequiredException(string method)
+    : InvalidOperationException($"Codex requested an approval before completing the specialization draft: {method}")
 {
-    public static string Build(AiStoDraftRequest request)
-    {
-        ArgumentNullException.ThrowIfNull(request);
-        var brief = (request.Brief ?? string.Empty).Trim();
-        if (brief.Length is < 12 or > 4_000)
-            throw new ArgumentException("Describe the desired specialist in 12–4000 characters.", nameof(request));
-
-        var workspace = Limit(request.WorkspacePath, 1_000);
-        var context = Limit(request.ExistingContext, 4_000);
-        return $$"""
-You are the AiSTo specialization designer inside Agent. AiSTo configures a Codex-based specialist; it is not a separate model.
-
-GOAL
-Construct a useful first draft from the user's short brief. Do not make the user fill every field and do not ask follow-up questions. Infer reasonable defaults, mark assumptions, and leave optional details empty when evidence is unavailable.
-
-RESEARCH AND REUSE RULES
-- First inspect available workspace context and relevant files if Codex tools and a workspace are actually available. Do not claim to have inspected a repository if no repository tool/context exists.
-- Consult current, official documentation that is directly relevant to the requested stack or domain when web/documentation tools are available. Prefer existing configured runtime tools and sources.
-- Check what Codex already provides. Do not duplicate native natural-language understanding, semantic navigation, web research, or documentation tools when the connected runtime already provides the capability. Record only complementary, verified project-specific rules in the AiSTo profile.
-- If a capability is unavailable, describe it as unavailable or requested, never as granted.
-- Do not modify files, execute repository writes, publish changes, or save the profile. This task only drafts configuration.
-- Never invent repository facts, versions, documentation references, benchmark results, or permissions. Use HTTPS documentation URLs only.
-- Avoid asking the user questions. Make a conservative proposal and list assumptions/evidence.
-
-USER BRIEF
-{{brief}}
-
-AVAILABLE WORKSPACE PATH (may be empty)
-{{workspace}}
-
-EXISTING CONTEXT (may be empty)
-{{context}}
-
-OUTPUT CONTRACT
-Return exactly one JSON object, with no markdown fence and no extra prose, matching this shape:
-{
-  "name": "short profile name",
-  "description": "one-sentence description",
-  "domain": "up to 80 characters",
-  "objective": "clear measurable goal, up to 1600 characters",
-  "instructions": "useful operating instructions, up to 8000 characters",
-  "projectContext": "verified context only, up to 5000 characters",
-  "documentationSources": ["https://..."],
-  "responseStyle": "StepByStep|Concise|Detailed|CriticalReview",
-  "canReadRepositories": true,
-  "canWriteRepositories": false,
-  "canBrowseWeb": false,
-  "useSemanticNavigation": false,
-  "preferUpdatedDocumentation": true,
-  "applyArchitectureRules": true,
-  "assumptions": ["..."],
-  "evidence": ["..." ]
+    public string Method { get; } = method;
 }
 
-Use no more than 20 documentationSources, 8 assumptions, and 12 evidence entries. Set capability booleans to true only where the connected runtime exposes the capability; they remain preferences, not permission grants. canWriteRepositories requires canReadRepositories. Keep the default write preference false. Return valid JSON.
-""";
+/// <summary>
+/// Uses the user's already-connected Codex App Server session to draft AiSTo.
+/// The turn is constrained to a read-only sandbox and a strict JSON output schema.
+/// It does not provision credentials, start a remote hosted runtime, or auto-approve tools.
+/// </summary>
+public sealed class AiStoDraftAssistant
+{
+    private static readonly JsonElement DraftOutputSchema = CreateDraftOutputSchema();
+
+    private static JsonElement CreateDraftOutputSchema()
+    {
+        using var document = JsonDocument.Parse("""
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "maxLength": 80 },
+        "description": { "type": "string", "maxLength": 240 },
+        "domain": { "type": "string", "maxLength": 80 },
+        "objective": { "type": "string", "maxLength": 1600 },
+        "instructions": { "type": "string", "maxLength": 8000 },
+        "projectContext": { "type": "string", "maxLength": 5000 },
+        "documentationSources": { "type": "array", "maxItems": 20, "items": { "type": "string", "maxLength": 2048 } },
+        "responseStyle": { "type": "string", "enum": ["StepByStep", "Concise", "Detailed", "CriticalReview"] },
+        "canReadRepositories": { "type": "boolean" },
+        "canWriteRepositories": { "type": "boolean" },
+        "canBrowseWeb": { "type": "boolean" },
+        "useSemanticNavigation": { "type": "boolean" },
+        "preferUpdatedDocumentation": { "type": "boolean" },
+        "applyArchitectureRules": { "type": "boolean" },
+        "assumptions": { "type": "array", "maxItems": 8, "items": { "type": "string", "maxLength": 500 } },
+        "evidence": { "type": "array", "maxItems": 12, "items": { "type": "string", "maxLength": 500 } }
+      },
+      "required": ["name", "description", "domain", "objective", "instructions", "projectContext", "documentationSources", "responseStyle", "canReadRepositories", "canWriteRepositories", "canBrowseWeb", "useSemanticNavigation", "preferUpdatedDocumentation", "applyArchitectureRules", "assumptions", "evidence"]
+    }
+    """);
+        return document.RootElement.Clone();
     }
 
-    private static string Limit(string? value, int length)
+    public async Task<AiStoDraftProfile> CreateDraftAsync(
+        CodexAppServerClient codex,
+        AiStoDraftRequest request,
+        Func<CodexServerMessage, CancellationToken, Task>? approvalHandler = null,
+        CancellationToken cancellationToken = default)
     {
-        var normalized = (value ?? string.Empty).Trim();
-        return normalized.Length <= length ? normalized : normalized[..length];
+        ArgumentNullException.ThrowIfNull(codex);
+        ArgumentNullException.ThrowIfNull(request);
+        if (!codex.IsConnected)
+            throw new InvalidOperationException("Connect the user's Codex App Server session before drafting AiSTo.");
+
+        var hasWorkspace = !string.IsNullOrWhiteSpace(request.WorkspacePath) && Directory.Exists(request.WorkspacePath);
+        var workspace = hasWorkspace ? Path.GetFullPath(request.WorkspacePath!) : Environment.CurrentDirectory;
+        var threadId = await codex.StartThreadAsync(workspace, cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
+        var sandboxPolicy = new
+        {
+            type = "readOnly",
+            access = hasWorkspace
+                ? (object)new { type = "restricted", readableRoots = new[] { workspace } }
+                : new { type = "restricted", readableRoots = Array.Empty<string>() }
+        };
+        var options = new CodexTurnOptions(
+            ApprovalPolicy: "never",
+            SandboxPolicy: sandboxPolicy,
+            OutputSchema: DraftOutputSchema);
+        var turnId = await codex.StartTurnAsync(threadId, AiStoDraftPromptBuilder.Build(request), options, cancellationToken)
+            .ConfigureAwait(false);
+
+        var output = new StringBuilder(capacity: 4_096);
+        await foreach (var message in codex.ReadMessagesAsync(cancellationToken).ConfigureAwait(false))
+        {
+            if (!BelongsToThread(message.Parameters, threadId))
+                continue;
+
+            if (message.RequiresResponse)
+            {
+                if (approvalHandler is not null)
+                {
+                    await approvalHandler(message, cancellationToken).ConfigureAwait(false);
+                    continue;
+                }
+
+                // No UI approval handler is present in this path. Reject known approval
+                // requests explicitly; never leave a server request waiting or auto-approve.
+                if (message.Method == "item/commandExecution/requestApproval")
+                    await codex.RespondToCommandApprovalAsync(message, CodexApprovalDecision.Decline, cancellationToken)
+                        .ConfigureAwait(false);
+                else if (message.Method == "item/fileChange/requestApproval")
+                    await codex.RespondToFileChangeApprovalAsync(message, CodexApprovalDecision.Decline, cancellationToken)
+                        .ConfigureAwait(false);
+                else
+                    await codex.RespondToServerRequestErrorAsync(message, -32601,
+                        "Agent does not support this server request.", cancellationToken: cancellationToken)
+                        .ConfigureAwait(false);
+
+                throw new AiStoDraftApprovalRequiredException(message.Method);
+            }
+
+            var eventData = AgentRuntimeEventMapper.Map(message);
+            switch (eventData.Kind)
+            {
+                case AgentRuntimeEventKind.AssistantTextDelta:
+                    if (!string.IsNullOrEmpty(eventData.Text) && output.Length + eventData.Text.Length <= 48 * 1024)
+                        output.Append(eventData.Text);
+                    break;
+                case AgentRuntimeEventKind.TurnCompleted:
+                    if (!string.Equals(ReadNestedString(message.Parameters, "turn", "id"), turnId, StringComparison.Ordinal))
+                        continue;
+                    if (eventData.Status != "completed")
+                        throw new InvalidOperationException(eventData.Text ?? $"Codex turn ended with status '{eventData.Status}'.");
+                    var parsed = AiStoDraftParser.Parse(output.ToString());
+                    if (!parsed.Success || parsed.Profile is null)
+                        throw new InvalidDataException(string.Join(" ", parsed.Errors));
+                    return parsed.Profile;
+            }
+        }
+
+        throw new EndOfStreamException("Codex App Server closed before the AiSTo draft completed.");
+    }
+
+    private static bool BelongsToThread(JsonElement parameters, string expectedThreadId)
+    {
+        var actual = ReadNestedString(parameters, "threadId");
+        return actual is null || string.Equals(actual, expectedThreadId, StringComparison.Ordinal);
+    }
+
+    private static string? ReadNestedString(JsonElement element, params string[] path)
+    {
+        foreach (var part in path)
+        {
+            if (element.ValueKind != JsonValueKind.Object || !element.TryGetProperty(part, out element))
+                return null;
+        }
+        return element.ValueKind == JsonValueKind.String ? element.GetString() : null;
     }
 }
