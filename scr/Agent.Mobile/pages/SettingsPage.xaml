@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Agent.Mobile.Pages.SettingsPage"
+             BackgroundColor="{DynamicResource AppBackground}"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*" RowSpacing="0">
+        <Grid Padding="20,14,20,12" ColumnDefinitions="44,*" ColumnSpacing="10">
+            <Button x:Name="BackButton" Text="‹" FontSize="25" Padding="0" WidthRequest="40" HeightRequest="40"
+                    BackgroundColor="{DynamicResource Surface}" Clicked="OnBackClicked"
+                    SemanticProperties.Description="Voltar" />
+            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                <Label Text="Configurações" FontSize="24" FontAttributes="Bold"
+                       SemanticProperties.HeadingLevel="Level1" />
+                <Label Text="Personalize o Agent neste dispositivo."
+                       FontSize="11" TextColor="{DynamicResource TextSecondary}" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout Padding="20,4,20,30" Spacing="15">
+                <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                        StrokeThickness="1" StrokeShape="RoundRectangle 18">
+                    <Grid ColumnDefinitions="42,*" ColumnSpacing="12">
+                        <Border WidthRequest="42" HeightRequest="42" BackgroundColor="{DynamicResource AccentSurface}"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 14">
+                            <Label Text="A" FontSize="22" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
+                                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                            <Label Text="Agent" FontSize="15" FontAttributes="Bold" />
+                            <Label Text="Configurações locais · versão 1.0.0" FontSize="10"
+                                   TextColor="{DynamicResource TextSecondary}" />
+                            <Label Text="As preferências abaixo são salvas neste dispositivo."
+                                   FontSize="9" TextColor="{DynamicResource TextMuted}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <SearchBar x:Name="SettingsSearch" Placeholder="Buscar configuração..."
+                           BackgroundColor="{DynamicResource Surface}" TextColor="{DynamicResource TextPrimary}"
+                           PlaceholderColor="{DynamicResource TextMuted}" CancelButtonColor="{DynamicResource Accent}"
+                           FontSize="13" TextChanged="OnSettingsSearchChanged"
+                           SemanticProperties.Description="Buscar uma configuração" />
+
+                <Label x:Name="NoResultsLabel" Text="Nenhuma configuração encontrada." IsVisible="False"
+                       FontSize="12" TextColor="{DynamicResource TextSecondary}"
+                       HorizontalTextAlignment="Center" Padding="10" />
+
+                <VerticalStackLayout x:Name="AccountSection" Spacing="8">
+                    <Label Text="CONTA E CONEXÕES" FontSize="10" CharacterSpacing="1.2"
+                           TextColor="{DynamicResource TextMuted}" />
+                    <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                            StrokeThickness="1" StrokeShape="RoundRectangle 17">
+                        <VerticalStackLayout Spacing="10">
+                            <Grid ColumnDefinitions="40,*,Auto" ColumnSpacing="10">
+                                <Border WidthRequest="38" HeightRequest="38" BackgroundColor="{DynamicResource SurfaceSubtle}"
+                                        StrokeThickness="0" StrokeShape="RoundRectangle 12">
+                                    <Label Text="M" FontSize="19" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                    <Label Text="Conta Microsoft" FontSize="13" FontAttributes="Bold" />
+                                    <Label Text="Login do aplicativo" FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2" Text="PENDENTE" FontSize="8" CharacterSpacing="0.5"
+                                       TextColor="{DynamicResource Warning}" VerticalTextAlignment="Center" />
+                            </Grid>
+                            <Label Text="A autenticação Microsoft ainda depende do registro do aplicativo e da integração MSAL."
+                                   FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                            <Button Text="Entrar com Microsoft" IsEnabled="False"
+                                    BackgroundColor="{DynamicResource SurfaceRaised}" TextColor="{DynamicResource TextMuted}" />
+                            <BoxView HeightRequest="1" Color="{DynamicResource Border}" />
+                            <Grid ColumnDefinitions="40,*,Auto" ColumnSpacing="10">
+                                <Border WidthRequest="38" HeightRequest="38" BackgroundColor="{DynamicResource AccentSurface}"
+                                        StrokeThickness="0" StrokeShape="RoundRectangle 12">
+                                    <Label Text="C" FontSize="19" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                    <Label Text="Codex" FontSize="13" FontAttributes="Bold" />
+                                    <Label Text="Autorização de IA separada" FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2" Text="PENDENTE" FontSize="8" CharacterSpacing="0.5"
+                                       TextColor="{DynamicResource Warning}" VerticalTextAlignment="Center" />
+                            </Grid>
+                            <Label Text="Entrar no Agent não concede acesso ao Codex. A integração será habilitada apenas por um fluxo oficialmente permitido."
+                                   FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                            <Button Text="Conectar Codex" IsEnabled="False"
+                                    BackgroundColor="{DynamicResource SurfaceRaised}" TextColor="{DynamicResource TextMuted}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout x:Name="AiPreferencesSection" Spacing="8">
+                    <Label Text="PREFERÊNCIAS DE IA" FontSize="10" CharacterSpacing="1.2"
+                           TextColor="{DynamicResource TextMuted}" />
+                    <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                            StrokeThickness="1" StrokeShape="RoundRectangle 17">
+                        <VerticalStackLayout Spacing="9">
+                            <Label Text="Estilo padrão das especializações AiSTo" FontSize="12" FontAttributes="Bold" />
+                            <Picker x:Name="ResponseStylePicker" Title="Escolher estilo"
+                                    TextColor="{DynamicResource TextPrimary}" TitleColor="{DynamicResource TextMuted}"
+                                    SelectedIndexChanged="OnResponseStyleChanged">
+                                <Picker.Items>
+                                    <x:String>Passo a passo</x:String>
+                                    <x:String>Objetivo e conciso</x:String>
+                                    <x:String>Detalhado e explicativo</x:String>
+                                    <x:String>Revisão crítica</x:String>
+                                </Picker.Items>
+                            </Picker>
+                            <Label Text="Esse padrão é aplicado ao criar uma nova especialização. Perfis já salvos não são alterados."
+                                   FontSize="9" TextColor="{DynamicResource TextSecondary}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout x:Name="AppearanceSection" Spacing="8">
+                    <Label Text="APARÊNCIA" FontSize="10" CharacterSpacing="1.2"
+                           TextColor="{DynamicResource TextMuted}" />
+                    <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                            StrokeThickness="1" StrokeShape="RoundRectangle 17">
+                        <VerticalStackLayout Spacing="9">
+                            <Label Text="Tema do aplicativo" FontSize="12" FontAttributes="Bold" />
+                            <Picker x:Name="ThemePicker" Title="Escolher tema"
+                                    TextColor="{DynamicResource TextPrimary}" TitleColor="{DynamicResource TextMuted}"
+                                    SelectedIndexChanged="OnThemeChanged">
+                                <Picker.Items>
+                                    <x:String>Sistema</x:String>
+                                    <x:String>Escuro</x:String>
+                                    <x:String>Claro</x:String>
+                                </Picker.Items>
+                            </Picker>
+                            <Label Text="A escolha é salva e aplicada imediatamente. O modo Sistema acompanha a aparência do Android."
+                                   FontSize="9" TextColor="{DynamicResource TextSecondary}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout x:Name="ConnectionSection" Spacing="8">
+                    <Label Text="SERVIDOR E CONEXÃO" FontSize="10" CharacterSpacing="1.2"
+                           TextColor="{DynamicResource TextMuted}" />
+                    <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                            StrokeThickness="1" StrokeShape="RoundRectangle 17">
+                        <VerticalStackLayout Spacing="9">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Endereço da API Agent" FontSize="12" FontAttributes="Bold" />
+                                <Label Grid.Column="1" Text="TESTE DISPONÍVEL" FontSize="8" CharacterSpacing="0.4"
+                                       TextColor="{DynamicResource Warning}" VerticalTextAlignment="Center" />
+                            </Grid>
+                            <Entry x:Name="ApiBaseUrlEntry" Placeholder="https://api.seudominio.com"
+                                   Keyboard="Url" ClearButtonVisibility="WhileEditing"
+                                   TextColor="{DynamicResource TextPrimary}" PlaceholderColor="{DynamicResource TextMuted}"
+                                   BackgroundColor="{DynamicResource CodeSurface}" FontSize="12" />
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                                <Button Text="Salvar endereço" Clicked="OnSaveApiUrlClicked"
+                                        BackgroundColor="{DynamicResource SurfaceRaised}" TextColor="{DynamicResource TextPrimary}" />
+                                <Button x:Name="TestApiConnectionButton" Grid.Column="1" Text="Testar conexão" Clicked="OnTestApiConnectionClicked"
+                                        BackgroundColor="{DynamicResource AccentStrong}" />
+                            </Grid>
+                            <Label Text="O teste consulta /health/live e /health/ready por HTTPS. Rotas de dados continuam protegidas por autenticação; testar a API não conecta sua conta Microsoft nem o Codex."
+                                   FontSize="9" TextColor="{DynamicResource TextSecondary}" />
+                            <Label x:Name="ApiUrlStatusLabel" FontSize="10" TextColor="{DynamicResource Success}"
+                                   IsVisible="False" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout x:Name="PrivacySection" Spacing="8">
+                    <Label Text="PRIVACIDADE E DADOS" FontSize="10" CharacterSpacing="1.2"
+                           TextColor="{DynamicResource TextMuted}" />
+                    <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                            StrokeThickness="1" StrokeShape="RoundRectangle 17">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Armazenamento de preferências" FontSize="12" FontAttributes="Bold" />
+                            <Label Text="Tema, estilo de resposta e endereço de API são mantidos pelo armazenamento de preferências do Android. Senhas e tokens não são armazenados aqui."
+                                   FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                            <BoxView HeightRequest="1" Color="{DynamicResource Border}" Margin="0,4" />
+                            <Label Text="Perfis de agentes" FontSize="12" FontAttributes="Bold" />
+                            <Label Text="Nesta versão, os perfis continuam no armazenamento JSON local. A sincronização com PostgreSQL ainda não foi conectada ao aplicativo."
+                                   FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout x:Name="AboutSection" Spacing="8">
+                    <Label Text="SOBRE" FontSize="10" CharacterSpacing="1.2"
+                           TextColor="{DynamicResource TextMuted}" />
+                    <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                            StrokeThickness="1" StrokeShape="RoundRectangle 17">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" RowSpacing="8">
+                            <Label Text="Aplicativo" FontSize="11" TextColor="{DynamicResource TextSecondary}" />
+                            <Label Grid.Column="1" Text="Agent" FontSize="11" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Text="Versão" FontSize="11" TextColor="{DynamicResource TextSecondary}" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="1.0.0 (10)" FontSize="11" />
+                            <Label Grid.Row="2" Text="Plataforma" FontSize="11" TextColor="{DynamicResource TextSecondary}" />
+                            <Label Grid.Row="2" Grid.Column="1" Text="Android · .NET MAUI 11" FontSize="11" />
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+
+                <Button Text="Restaurar configurações padrão" Clicked="OnResetClicked"
+                        BackgroundColor="{DynamicResource SurfaceRaised}" TextColor="{DynamicResource Danger}"
+                        SemanticProperties.Description="Restaurar as configurações do Agent para os valores padrão" />
+                <Label Text="As configurações são preferências do aplicativo. Recursos que ainda aguardam integração aparecem desativados ou identificados como pendentes."
+                       FontSize="9" TextColor="{DynamicResource TextMuted}" HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
