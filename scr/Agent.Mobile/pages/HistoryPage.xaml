@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Agent.Mobile.Pages.HistoryPage"
+             BackgroundColor="{DynamicResource AppBackground}"
+             Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,20,20,30" Spacing="15">
+        <Grid ColumnDefinitions="44,*" ColumnSpacing="9">
+            <Button Text="‹" FontSize="25" Padding="0" WidthRequest="40" HeightRequest="40"
+                    BackgroundColor="{DynamicResource Surface}" Clicked="OnBackClicked"
+                    SemanticProperties.Description="Voltar para Mais" />
+            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                <Label Text="Histórico" FontSize="23" FontAttributes="Bold"
+                       SemanticProperties.HeadingLevel="Level1" />
+                <Label Text="Conversas e tarefas do Codex."
+                       FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+            </VerticalStackLayout>
+        </Grid>
+        <Border Padding="17" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                StrokeThickness="1" StrokeShape="RoundRectangle 18">
+            <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                <Label Text="◷" FontSize="30" TextColor="{DynamicResource Accent}" HorizontalTextAlignment="Center" />
+                <Label Text="Ainda não há sessões" FontSize="15" FontAttributes="Bold" />
+                <Label Text="O histórico será carregado a partir dos identificadores reais de thread e turn do Codex quando o serviço de persistência estiver conectado."
+                       FontSize="11" TextColor="{DynamicResource TextSecondary}" HorizontalTextAlignment="Center" />
+                <Label Text="PERSISTÊNCIA PENDENTE" FontSize="9" CharacterSpacing="0.8"
+                       TextColor="{DynamicResource Warning}" />
+            </VerticalStackLayout>
+        </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
