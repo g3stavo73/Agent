@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Agent.Mobile.Pages.ProjectsPage"
+             BackgroundColor="{DynamicResource AppBackground}"
+             Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="22,28" Spacing="18">
+        <Label Text="Projetos" FontSize="27" FontAttributes="Bold" />
+        <Label Text="Escolha uma pasta local para dar contexto ao Codex." FontSize="14"
+               TextColor="{DynamicResource TextSecondary}" />
+        <Border Padding="17" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                StrokeThickness="1" StrokeShape="RoundRectangle 18">
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Nenhum workspace selecionado" FontSize="15" FontAttributes="Bold" />
+                <Label Text="O acesso a arquivos será solicitado pelo seletor de documentos do Android. Depois, o backend poderá indexar símbolos e dependências para dar contexto ao Codex; nada será indexado nesta prévia." 
+                       FontSize="12" TextColor="{DynamicResource TextSecondary}" />
+                <Button Text="Selecionar pasta" IsEnabled="False" BackgroundColor="{DynamicResource AccentStrong}"
+                        SemanticProperties.Description="Selecionar uma pasta de projeto quando o backend estiver disponível" />
+                <Label Text="Seletor de workspace e indexação semântica ainda não conectados." FontSize="10"
+                       TextColor="{DynamicResource TextMuted}" />
+            </VerticalStackLayout>
+        </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
