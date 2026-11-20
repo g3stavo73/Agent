@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Agent.Mobile.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="AppBackground">#0D1016</Color>
+            <Color x:Key="Surface">#151A23</Color>
+            <Color x:Key="SurfaceRaised">#1B2230</Color>
+            <Color x:Key="SurfaceSubtle">#202938</Color>
+            <Color x:Key="Border">#2A3342</Color>
+            <Color x:Key="TextPrimary">#F1F4F9</Color>
+            <Color x:Key="TextSecondary">#A4AFBF</Color>
+            <Color x:Key="TextMuted">#758195</Color>
+            <Color x:Key="Accent">#A8A5FF</Color>
+            <Color x:Key="AccentStrong">#7772E8</Color>
+            <Color x:Key="AccentSurface">#262541</Color>
+            <Color x:Key="Success">#71D6A1</Color>
+            <Color x:Key="Warning">#E8C27A</Color>
+            <Color x:Key="Danger">#F08B91</Color>
+            <Color x:Key="CodeSurface">#10151D</Color>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource TextPrimary}" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="CornerRadius" Value="14" />
+                <Setter Property="Padding" Value="16,11" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{DynamicResource TextPrimary}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource SurfaceRaised}" />
+            </Style>
+            <Style TargetType="Editor">
+                <Setter Property="TextColor" Value="{DynamicResource TextPrimary}" />
+                <Setter Property="PlaceholderColor" Value="{DynamicResource TextMuted}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
