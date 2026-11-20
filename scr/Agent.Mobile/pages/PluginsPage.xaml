@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Agent.Mobile.Pages.PluginsPage"
+             BackgroundColor="{DynamicResource AppBackground}"
+             Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,20,20,30" Spacing="15">
+            <Grid ColumnDefinitions="44,*" ColumnSpacing="9">
+                <Button Text="‹" FontSize="25" Padding="0" WidthRequest="40" HeightRequest="40"
+                        BackgroundColor="{DynamicResource Surface}" Clicked="OnBackClicked"
+                        SemanticProperties.Description="Voltar para Mais" />
+                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                    <Label Text="Plugins e ferramentas" FontSize="22" FontAttributes="Bold"
+                           SemanticProperties.HeadingLevel="Level1" />
+                    <Label Text="Conectores que ampliam o Codex."
+                           FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border Padding="13" BackgroundColor="{DynamicResource AccentSurface}" StrokeThickness="0"
+                    StrokeShape="RoundRectangle 16">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="CODEX ONLY" FontSize="9" CharacterSpacing="0.8" FontAttributes="Bold"
+                           TextColor="{DynamicResource Accent}" />
+                    <Label Text="Esta área gerenciará ferramentas e conectores utilizados pelo Codex. Não há seleção de outros provedores de IA nesta versão."
+                           FontSize="11" TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                    StrokeThickness="1" StrokeShape="RoundRectangle 17">
+                <Grid ColumnDefinitions="36,*,Auto" ColumnSpacing="10">
+                    <Border WidthRequest="34" HeightRequest="34" BackgroundColor="{DynamicResource SurfaceSubtle}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 11">
+                        <Label Text="C" FontSize="17" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="3">
+                        <Label Text="Codex App Server" FontSize="13" FontAttributes="Bold" />
+                        <Label Text="Protocolo de conversa, sessões e aprovações." FontSize="10"
+                               TextColor="{DynamicResource TextSecondary}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="PENDENTE" FontSize="8" TextColor="{DynamicResource Warning}"
+                           VerticalTextAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                    StrokeThickness="1" StrokeShape="RoundRectangle 17">
+                <Grid ColumnDefinitions="36,*,Auto" ColumnSpacing="10">
+                    <Border WidthRequest="34" HeightRequest="34" BackgroundColor="{DynamicResource SurfaceSubtle}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 11">
+                        <Label Text="GH" FontSize="10" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="3">
+                        <Label Text="GitHub" FontSize="13" FontAttributes="Bold" />
+                        <Label Text="Leitura, seleção e alterações revisáveis em repositórios." FontSize="10"
+                               TextColor="{DynamicResource TextSecondary}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="PLANEJADO" FontSize="8" TextColor="{DynamicResource Warning}"
+                           VerticalTextAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                    StrokeThickness="1" StrokeShape="RoundRectangle 17">
+                <Grid ColumnDefinitions="36,*,Auto" ColumnSpacing="10">
+                    <Border WidthRequest="34" HeightRequest="34" BackgroundColor="{DynamicResource SurfaceSubtle}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 11">
+                        <Label Text="⌕" FontSize="20" TextColor="{DynamicResource Accent}"
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="3">
+                        <Label Text="Pesquisa na web" FontSize="13" FontAttributes="Bold" />
+                        <Label Text="Consulta de fontes e documentação para o Codex." FontSize="10"
+                               TextColor="{DynamicResource TextSecondary}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="PLANEJADO" FontSize="8" TextColor="{DynamicResource Warning}"
+                           VerticalTextAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <Label Text="O catálogo e as configurações serão carregados do backend e persistidos no banco SQL. Nenhuma ferramenta está instalada ou executando nesta prévia."
+                   FontSize="10" TextColor="{DynamicResource TextMuted}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
