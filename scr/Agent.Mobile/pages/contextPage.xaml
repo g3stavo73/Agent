@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Agent.Mobile.Pages.ContextPage"
+             BackgroundColor="{DynamicResource AppBackground}"
+             Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,20,20,30" Spacing="15">
+            <Grid ColumnDefinitions="44,*" ColumnSpacing="9">
+                <Button Text="‹" FontSize="25" Padding="0" WidthRequest="40" HeightRequest="40"
+                        BackgroundColor="{DynamicResource Surface}" Clicked="OnBackClicked"
+                        SemanticProperties.Description="Voltar para Mais" />
+                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                    <Label Text="Contexto do projeto" FontSize="22" FontAttributes="Bold"
+                           SemanticProperties.HeadingLevel="Level1" />
+                    <Label Text="Como o backend preparará informações para o Codex."
+                           FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border Padding="13" BackgroundColor="{DynamicResource AccentSurface}" StrokeThickness="0"
+                    StrokeShape="RoundRectangle 16">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="PREPARAÇÃO DO BACKEND" FontSize="9" CharacterSpacing="0.8"
+                           FontAttributes="Bold" TextColor="{DynamicResource Accent}" />
+                    <Label Text="Estas funções serão executadas pelos serviços de contexto. O aplicativo mostrará estado, fontes, resultados e avisos — não simulará uma análise pronta."
+                           FontSize="11" TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                    StrokeThickness="1" StrokeShape="RoundRectangle 17">
+                <VerticalStackLayout Spacing="7">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="01 · Navegação e entendimento semântico" FontSize="14" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Text="PLANEJADO" FontSize="8" TextColor="{DynamicResource Warning}"
+                               VerticalTextAlignment="Center" />
+                    </Grid>
+                    <Label Text="O agente não ficará limitado a procurar nomes de arquivos. O backend poderá mapear símbolos, módulos, dependências, chamadas, referências e relações entre partes do repositório."
+                           FontSize="11" TextColor="{DynamicResource TextSecondary}" />
+                    <Label Text="Exemplo: entender onde uma alteração em autenticação afeta serviços, telas e testes relacionados."
+                           FontSize="10" TextColor="{DynamicResource TextMuted}" />
+                    <Label Text="Interface futura: mapa de dependências, arquivos relacionados, resultados por relevância e fontes do contexto."
+                           FontSize="10" TextColor="{DynamicResource Accent}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                    StrokeThickness="1" StrokeShape="RoundRectangle 17">
+                <VerticalStackLayout Spacing="7">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="02 · Documentação atualizada" FontSize="14" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Text="PLANEJADO" FontSize="8" TextColor="{DynamicResource Warning}"
+                               VerticalTextAlignment="Center" />
+                    </Grid>
+                    <Label Text="O backend poderá identificar a linguagem e as versões do projeto, priorizar documentação oficial compatível e registrar a origem e a data da consulta."
+                           FontSize="11" TextColor="{DynamicResource TextSecondary}" />
+                    <Label Text="Exemplo: consultar a documentação da versão do .NET ou Rust usada no repositório, em vez de misturar instruções de versões diferentes."
+                           FontSize="10" TextColor="{DynamicResource TextMuted}" />
+                    <Label Text="Interface futura: fonte, versão, data de verificação e aviso quando a referência estiver desatualizada."
+                           FontSize="10" TextColor="{DynamicResource Accent}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
+                    StrokeThickness="1" StrokeShape="RoundRectangle 17">
+                <VerticalStackLayout Spacing="7">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="03 · Regras de arquitetura" FontSize="14" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Text="PLANEJADO" FontSize="8" TextColor="{DynamicResource Warning}"
+                               VerticalTextAlignment="Center" />
+                    </Grid>
+                    <Label Text="O agente poderá carregar regras do projeto, limites entre camadas, convenções, padrões de segurança e critérios de revisão antes de propor mudanças."
+                           FontSize="11" TextColor="{DynamicResource TextSecondary}" />
+                    <Label Text="Exemplo: impedir que uma página MAUI acesse diretamente o runtime ou que uma alteração contorne a camada de serviços."
+                           FontSize="10" TextColor="{DynamicResource TextMuted}" />
+                    <Label Text="Interface futura: regras ativas, arquivos de origem, conflitos encontrados e justificativa da validação."
+                           FontSize="10" TextColor="{DynamicResource Accent}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="As preferências podem ser escolhidas no perfil do agente. A indexação, a consulta das fontes e a aplicação das regras ainda não estão conectadas."
+                   FontSize="10" TextColor="{DynamicResource TextMuted}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
