@@ -52,8 +52,7 @@ jobs:
 
       - name: Restore dependencies
         run: |
-          dotnet restore scr/Agent.Mobile/Agent.Mobile.csproj \
-            -p:TargetFramework=net11.0-android37.2
+          dotnet restore scr/Agent.Mobile/Agent.Mobile.csproj
 
       - name: Build and publish APK
         run: |
@@ -76,7 +75,7 @@ jobs:
             -type f -name '*.apk' | head -n 1)"
 
           if [ -z "$APK_PATH" ]; then
-            echo "APK not found."
+            echo "APK was not generated."
             exit 1
           fi
 
