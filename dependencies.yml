@@ -1,0 +1,169 @@
+
+schema_version: 1
+
+project:
+  name: Agent
+  description: "Central dependency registry and CI/CD configuration"
+  root: "."
+
+policy:
+  lockfiles_required: true
+  floating_versions: forbidden
+  prerelease_dependencies: require_review
+  dependency_updates: reviewed
+  security_audit: enabled
+
+# Toolchains required by the project
+toolchains:
+
+  dotnet:
+    enabled: true
+    version_file: global.json
+    framework: ".NET"
+    workloads:
+      - maui-android
+
+  rust:
+    enabled: true
+    version_file: rust-toolchain.toml
+    components:
+      - rustfmt
+      - clippy
+
+  node:
+    enabled: false
+    activation: "Enable when package.json is present"
+    version_file: .nvmrc
+    package_manager: npm
+
+# Native dependency managers and their sources of truth
+ecosystems:
+
+  nuget:
+    enabled: true
+    manager: NuGet
+
+    manifests:
+      - "**/*.csproj"
+      - Directory.Packages.props
+
+    lockfiles:
+      - "**/packages.lock.json"
+
+    bootstrap:
+      - "dotnet restore Agent.sln -p:RestorePackagesWithLockFile=true"
+
+    install:
+      - "dotnet restore Agent.sln --locked-mode"
+
+    validate:
+      - "dotnet build Agent.sln --no-restore --configuration Release"
+
+  cargo:
+    enabled: true
+    manager: Cargo
+
+    manifests:
+      - "**/Cargo.toml"
+
+    lockfiles:
+      - "**/Cargo.lock"
+
+    bootstrap:
+      - "cargo generate-lockfile"
+
+    install:
+      - "cargo fetch --locked"
+
+    validate:
+      - "cargo fmt --all -- --check"
+      - "cargo check --workspace --locked"
+      - "cargo clippy --workspace --all-targets --all-features -- -D warnings"
+
+  npm:
+    enabled: false
+    manager: npm
+
+    manifests:
+      - "**/package.json"
+
+    lockfiles:
+      - "**/package-lock.json"
+
+    bootstrap:
+      - "npm install"
+
+    install:
+      - "npm ci"
+
+    validate:
+      - "npm audit"
+
+# Infrastructure dependencies are not NuGet/Cargo packages.
+infrastructure:
+
+  postgresql:
+    enabled: false
+    type: database
+    version_source: compose.yaml
+    required_for:
+      - backend
+
+  sqlite:
+    enabled: false
+    type: embedded-database
+    version_source: native-dependency-manifest
+
+# CI/CD execution contract
+ci:
+  enabled: true
+
+  triggers:
+    - push
+    - pull_request
+    - workflow_dispatch
+
+  stages:
+    - name: dependency_discovery
+      purpose: "Find dependency manifests and lockfiles"
+
+    - name: toolchain_validation
+      purpose: "Verify required SDKs and toolchains"
+
+    - name: dependency_installation
+      purpose: "Restore dependencies using native package managers"
+
+    - name: lockfile_validation
+      purpose: "Detect missing or outdated lockfiles"
+
+    - name: build_validation
+      purpose: "Check whether project components build successfully"
+
+    - name: security_validation
+      purpose: "Review dependency vulnerabilities"
+
+  failure_policy:
+    missing_required_manifest: error
+    missing_lockfile: error
+    restore_failure: error
+    build_failure: error
+    security_findings: report
+
+# Dependency inventory metadata
+inventory:
+  categories:
+    - frameworks
+    - libraries
+    - runtimes
+    - compilers
+    - build_tools
+    - databases
+    - external_services
+
+  record:
+    name: required
+    ecosystem: required
+    version: required
+    purpose: required
+    direct: required
+    source_manifest: required
