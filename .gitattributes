@@ -1,0 +1,76 @@
+
+# Normalização de finais de linha
+* text=auto
+
+# Código e configurações
+*.cs text eol=lf
+*.csproj text eol=lf
+*.sln text eol=lf
+*.props text eol=lf
+*.targets text eol=lf
+*.razor text eol=lf
+*.xaml text eol=lf
+*.xml text eol=lf
+*.json text eol=lf
+*.jsonc text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.md text eol=lf
+*.sql text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=lf
+
+# Rust
+*.rs text eol=lf
+Cargo.toml text eol=lf
+Cargo.lock text eol=lf
+
+# JavaScript / TypeScript
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+
+# C / C++
+*.c text eol=lf
+*.h text eol=lf
+*.cpp text eol=lf
+*.hpp text eol=lf
+
+# Arquivos de documentação
+*.txt text eol=lf
+*.rst text eol=lf
+
+# Arquivos binários
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.7z binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.exe binary
+*.apk binary
+*.aab binary
+*.class binary
+*.jar binary
+*.pdb binary
+*.wasm binary
+
+# Fontes
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+
+# Arquivos específicos do Windows
+*.bat text eol=crlf
+*.cmd text eol=crlf
