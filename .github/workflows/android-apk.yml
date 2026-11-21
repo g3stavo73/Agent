@@ -24,7 +24,6 @@ concurrency:
 jobs:
   build:
     name: Build Android APK
-
     runs-on: ubuntu-latest
 
     steps:
@@ -48,16 +47,13 @@ jobs:
       - name: Install MAUI Android workload
         run: dotnet workload install maui-android
 
-      - name: Verify Android framework
-        run: |
-          dotnet --list-sdks
-          dotnet workload list
+      - name: Verify Android workload
+        run: dotnet workload list
 
       - name: Restore dependencies
         run: |
-          dotnet restore \
-            scr/Agent.Mobile/Agent.Mobile.csproj \
-            --framework net11.0-android37.2
+          dotnet restore scr/Agent.Mobile/Agent.Mobile.csproj \
+            -p:TargetFramework=net11.0-android37.2
 
       - name: Build and publish APK
         run: |
@@ -69,7 +65,7 @@ jobs:
             -p:AndroidPackageFormats=apk \
             -p:AndroidKeyStore=false
 
-      - name: Find generated APK
+      - name: Locate APK
         shell: bash
         run: |
           set -euo pipefail
@@ -77,24 +73,21 @@ jobs:
           mkdir -p artifacts
 
           APK_PATH="$(find scr/Agent.Mobile/bin/Release \
-            -type f \
-            -name '*.apk' \
-            | head -n 1)"
+            -type f -name '*.apk' | head -n 1)"
 
           if [ -z "$APK_PATH" ]; then
-            echo "APK was not generated."
+            echo "APK not found."
             exit 1
           fi
 
           cp "$APK_PATH" artifacts/Agent.apk
 
-          echo "APK generated successfully:"
-          ls -lh artifacts/Agent.apk
-
           sha256sum artifacts/Agent.apk \
             > artifacts/Agent.apk.sha256
 
-      - name: Upload APK artifact
+          ls -lh artifacts/
+
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Agent-Android-APK
