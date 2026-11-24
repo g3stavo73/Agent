@@ -4,23 +4,54 @@
              x:Class="Agent.Mobile.Pages.ProjectsPage"
              BackgroundColor="{DynamicResource AppBackground}"
              Shell.NavBarIsVisible="False">
-    <ScrollView>
-        <VerticalStackLayout Padding="22,28" Spacing="18">
-        <Label Text="Projetos" FontSize="27" FontAttributes="Bold" />
-        <Label Text="Escolha uma pasta local para dar contexto ao Codex." FontSize="14"
-               TextColor="{DynamicResource TextSecondary}" />
-        <Border Padding="17" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
-                StrokeThickness="1" StrokeShape="RoundRectangle 18">
-            <VerticalStackLayout Spacing="10">
-                <Label Text="Nenhum workspace selecionado" FontSize="15" FontAttributes="Bold" />
-                <Label Text="O acesso a arquivos será solicitado pelo seletor de documentos do Android. Depois, o backend poderá indexar símbolos e dependências para dar contexto ao Codex; nada será indexado nesta prévia." 
-                       FontSize="12" TextColor="{DynamicResource TextSecondary}" />
-                <Button Text="Selecionar pasta" IsEnabled="False" BackgroundColor="{DynamicResource AccentStrong}"
-                        SemanticProperties.Description="Selecionar uma pasta de projeto quando o backend estiver disponível" />
-                <Label Text="Seletor de workspace e indexação semântica ainda não conectados." FontSize="10"
-                       TextColor="{DynamicResource TextMuted}" />
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Padding="22,26,22,30" Spacing="17"
+                             HorizontalOptions="Center" MaximumWidthRequest="620">
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Projetos" FontSize="29" FontAttributes="Bold"
+                       SemanticProperties.HeadingLevel="Level1" />
+                <Label Text="Escolha o workspace que dará contexto ao Codex."
+                       FontSize="13" TextColor="{DynamicResource TextSecondary}" />
             </VerticalStackLayout>
-        </Border>
+
+            <Border Padding="18" BackgroundColor="{DynamicResource Surface}"
+                    Stroke="{DynamicResource Border}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 20">
+                <VerticalStackLayout Spacing="11" HorizontalOptions="Center">
+                    <Border WidthRequest="60" HeightRequest="60"
+                            BackgroundColor="{DynamicResource AccentSurface}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 19"
+                            HorizontalOptions="Center">
+                        <Label Text="⌘" FontSize="28" TextColor="{DynamicResource Accent}"
+                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                    </Border>
+                    <Label Text="Nenhum workspace selecionado" FontSize="17"
+                           FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    <Label Text="O seletor de pastas do Android e a integração com o runtime ainda não foram conectados. Quando estiverem prontos, você poderá conceder acesso somente ao projeto escolhido." 
+                           FontSize="12" LineHeight="1.3"
+                           TextColor="{DynamicResource TextSecondary}"
+                           HorizontalTextAlignment="Center" />
+                    <Border Padding="9,6" BackgroundColor="{DynamicResource SurfaceRaised}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                        <Label Text="SELETOR DE WORKSPACE PENDENTE"
+                               FontSize="9" FontAttributes="Bold"
+                               TextColor="{DynamicResource Warning}" />
+                    </Border>
+                    <Button Text="Selecionar pasta" IsEnabled="False"
+                            BackgroundColor="{DynamicResource AccentStrong}"
+                            TextColor="White" HeightRequest="48" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Padding="14" BackgroundColor="{DynamicResource SurfaceRaised}"
+                    StrokeThickness="0" StrokeShape="RoundRectangle 15">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Privacidade do workspace" FontSize="12" FontAttributes="Bold" />
+                    <Label Text="O acesso a arquivos deve ser concedido pelo usuário por meio do seletor do sistema. A prévia atual não lê, indexa nem envia arquivos." 
+                           FontSize="10" LineHeight="1.25"
+                           TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
