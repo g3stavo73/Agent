@@ -4,86 +4,124 @@
              x:Class="Agent.Mobile.Pages.PluginsPage"
              BackgroundColor="{DynamicResource AppBackground}"
              Shell.NavBarIsVisible="False">
-    <ScrollView>
-        <VerticalStackLayout Padding="20,20,20,30" Spacing="15">
-            <Grid ColumnDefinitions="44,*" ColumnSpacing="9">
-                <Button Text="‹" FontSize="25" Padding="0" WidthRequest="40" HeightRequest="40"
-                        BackgroundColor="{DynamicResource Surface}" Clicked="OnBackClicked"
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Padding="20,20,20,30" Spacing="16"
+                             HorizontalOptions="Center" MaximumWidthRequest="620">
+            <Grid ColumnDefinitions="48,*" ColumnSpacing="10">
+                <Button Text="‹" FontSize="25" Padding="0" WidthRequest="44" HeightRequest="44"
+                        BackgroundColor="{DynamicResource Surface}"
+                        Clicked="OnBackClicked"
                         SemanticProperties.Description="Voltar para Mais" />
                 <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
-                    <Label Text="Plugins e ferramentas" FontSize="22" FontAttributes="Bold"
+                    <Label Text="Plugins e ferramentas" FontSize="23" FontAttributes="Bold"
                            SemanticProperties.HeadingLevel="Level1" />
-                    <Label Text="Conectores que ampliam o Codex."
-                           FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                    <Label Text="Conectores e capacidades disponíveis ao runtime."
+                           FontSize="11" TextColor="{DynamicResource TextSecondary}" />
                 </VerticalStackLayout>
             </Grid>
 
-            <Border Padding="13" BackgroundColor="{DynamicResource AccentSurface}" StrokeThickness="0"
-                    StrokeShape="RoundRectangle 16">
-                <VerticalStackLayout Spacing="4">
-                    <Label Text="CODEX ONLY" FontSize="9" CharacterSpacing="0.8" FontAttributes="Bold"
-                           TextColor="{DynamicResource Accent}" />
-                    <Label Text="Esta área gerenciará ferramentas e conectores utilizados pelo Codex. Não há seleção de outros provedores de IA nesta versão."
-                           FontSize="11" TextColor="{DynamicResource TextSecondary}" />
+            <Border Padding="16" BackgroundColor="{DynamicResource AccentSurface}"
+                    StrokeThickness="0" StrokeShape="RoundRectangle 17">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="VISÃO GERAL" FontSize="9" CharacterSpacing="1.2"
+                           FontAttributes="Bold" TextColor="{DynamicResource Accent}" />
+                    <Label Text="O catálogo ainda não está conectado" FontSize="16" FontAttributes="Bold" />
+                    <Label Text="Esta tela mostra as integrações planejadas. Nenhuma delas está instalada ou executando nesta versão; os estados abaixo não são controles de ativação." 
+                           FontSize="11" LineHeight="1.25"
+                           TextColor="{DynamicResource TextSecondary}" />
                 </VerticalStackLayout>
             </Border>
 
-            <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
-                    StrokeThickness="1" StrokeShape="RoundRectangle 17">
-                <Grid ColumnDefinitions="36,*,Auto" ColumnSpacing="10">
-                    <Border WidthRequest="34" HeightRequest="34" BackgroundColor="{DynamicResource SurfaceSubtle}"
-                            StrokeThickness="0" StrokeShape="RoundRectangle 11">
-                        <Label Text="C" FontSize="17" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
+            <Label Text="RUNTIME" FontSize="10" CharacterSpacing="1.2"
+                   FontAttributes="Bold" TextColor="{DynamicResource TextMuted}" />
+            <Border Padding="15" BackgroundColor="{DynamicResource Surface}"
+                    Stroke="{DynamicResource Border}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 17">
+                <Grid ColumnDefinitions="42,*,Auto" ColumnSpacing="11">
+                    <Border WidthRequest="40" HeightRequest="40"
+                            BackgroundColor="{DynamicResource AccentSurface}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 13">
+                        <Label Text="C" FontSize="20" FontAttributes="Bold"
+                               TextColor="{DynamicResource Accent}"
                                HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                     </Border>
                     <VerticalStackLayout Grid.Column="1" Spacing="3">
                         <Label Text="Codex App Server" FontSize="13" FontAttributes="Bold" />
-                        <Label Text="Protocolo de conversa, sessões e aprovações." FontSize="10"
+                        <Label Text="Conversas, sessões, eventos e aprovações" FontSize="10"
                                TextColor="{DynamicResource TextSecondary}" />
                     </VerticalStackLayout>
-                    <Label Grid.Column="2" Text="PENDENTE" FontSize="8" TextColor="{DynamicResource Warning}"
-                           VerticalTextAlignment="Center" />
+                    <Border Grid.Column="2" Padding="8,5"
+                            BackgroundColor="{DynamicResource SurfaceRaised}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 9"
+                            VerticalOptions="Center">
+                        <Label Text="NÃO CONECTADO" FontSize="8" FontAttributes="Bold"
+                               TextColor="{DynamicResource Warning}" />
+                    </Border>
                 </Grid>
             </Border>
 
-            <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
-                    StrokeThickness="1" StrokeShape="RoundRectangle 17">
-                <Grid ColumnDefinitions="36,*,Auto" ColumnSpacing="10">
-                    <Border WidthRequest="34" HeightRequest="34" BackgroundColor="{DynamicResource SurfaceSubtle}"
-                            StrokeThickness="0" StrokeShape="RoundRectangle 11">
-                        <Label Text="GH" FontSize="10" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
+            <Label Text="CONECTORES" FontSize="10" CharacterSpacing="1.2"
+                   FontAttributes="Bold" TextColor="{DynamicResource TextMuted}" />
+            <Border Padding="15" BackgroundColor="{DynamicResource Surface}"
+                    Stroke="{DynamicResource Border}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 17">
+                <Grid ColumnDefinitions="42,*,Auto" ColumnSpacing="11">
+                    <Border WidthRequest="40" HeightRequest="40"
+                            BackgroundColor="{DynamicResource SurfaceSubtle}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 13">
+                        <Label Text="GH" FontSize="11" FontAttributes="Bold"
+                               TextColor="{DynamicResource Accent}"
                                HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                     </Border>
                     <VerticalStackLayout Grid.Column="1" Spacing="3">
                         <Label Text="GitHub" FontSize="13" FontAttributes="Bold" />
-                        <Label Text="Leitura, seleção e alterações revisáveis em repositórios." FontSize="10"
+                        <Label Text="Repositórios, arquivos e alterações revisáveis" FontSize="10"
                                TextColor="{DynamicResource TextSecondary}" />
                     </VerticalStackLayout>
-                    <Label Grid.Column="2" Text="PLANEJADO" FontSize="8" TextColor="{DynamicResource Warning}"
-                           VerticalTextAlignment="Center" />
+                    <Border Grid.Column="2" Padding="8,5"
+                            BackgroundColor="{DynamicResource SurfaceRaised}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 9"
+                            VerticalOptions="Center">
+                        <Label Text="PLANEJADO" FontSize="8" FontAttributes="Bold"
+                               TextColor="{DynamicResource Warning}" />
+                    </Border>
                 </Grid>
             </Border>
 
-            <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
-                    StrokeThickness="1" StrokeShape="RoundRectangle 17">
-                <Grid ColumnDefinitions="36,*,Auto" ColumnSpacing="10">
-                    <Border WidthRequest="34" HeightRequest="34" BackgroundColor="{DynamicResource SurfaceSubtle}"
-                            StrokeThickness="0" StrokeShape="RoundRectangle 11">
-                        <Label Text="⌕" FontSize="20" TextColor="{DynamicResource Accent}"
+            <Border Padding="15" BackgroundColor="{DynamicResource Surface}"
+                    Stroke="{DynamicResource Border}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 17">
+                <Grid ColumnDefinitions="42,*,Auto" ColumnSpacing="11">
+                    <Border WidthRequest="40" HeightRequest="40"
+                            BackgroundColor="{DynamicResource SurfaceSubtle}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 13">
+                        <Label Text="⌕" FontSize="23" TextColor="{DynamicResource Accent}"
                                HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                     </Border>
                     <VerticalStackLayout Grid.Column="1" Spacing="3">
                         <Label Text="Pesquisa na web" FontSize="13" FontAttributes="Bold" />
-                        <Label Text="Consulta de fontes e documentação para o Codex." FontSize="10"
+                        <Label Text="Consulta de fontes e documentação" FontSize="10"
                                TextColor="{DynamicResource TextSecondary}" />
                     </VerticalStackLayout>
-                    <Label Grid.Column="2" Text="PLANEJADO" FontSize="8" TextColor="{DynamicResource Warning}"
-                           VerticalTextAlignment="Center" />
+                    <Border Grid.Column="2" Padding="8,5"
+                            BackgroundColor="{DynamicResource SurfaceRaised}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 9"
+                            VerticalOptions="Center">
+                        <Label Text="PLANEJADO" FontSize="8" FontAttributes="Bold"
+                               TextColor="{DynamicResource Warning}" />
+                    </Border>
                 </Grid>
             </Border>
 
-            <Label Text="O catálogo e as configurações serão carregados do backend e persistidos no banco SQL. Nenhuma ferramenta está instalada ou executando nesta prévia."
-                   FontSize="10" TextColor="{DynamicResource TextMuted}" />
+            <Border Padding="14" BackgroundColor="{DynamicResource SurfaceRaised}"
+                    StrokeThickness="0" StrokeShape="RoundRectangle 15">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Como isso será ativado" FontSize="12" FontAttributes="Bold" />
+                    <Label Text="O catálogo, as permissões e as configurações precisarão vir do runtime/API. A interface não deve simular uma instalação quando o serviço ainda não confirmou que o conector está pronto." 
+                           FontSize="10" LineHeight="1.25"
+                           TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
