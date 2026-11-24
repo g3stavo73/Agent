@@ -4,159 +4,142 @@
              x:Class="Agent.Mobile.Pages.ChatPage"
              BackgroundColor="{DynamicResource AppBackground}"
              Shell.NavBarIsVisible="False">
-    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="18,12,18,10" RowSpacing="12">
-        <!-- Header -->
-        <Grid Grid.Row="0" ColumnDefinitions="42,*,Auto" ColumnSpacing="11" VerticalOptions="Center">
-            <Border WidthRequest="42" HeightRequest="42" StrokeThickness="1" Stroke="{DynamicResource Border}"
-                    BackgroundColor="{DynamicResource Surface}" StrokeShape="RoundRectangle 14">
-                <Label Text="A" FontSize="22" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="18,12,18,12" RowSpacing="12">
+        <Grid Grid.Row="0" ColumnDefinitions="44,*,Auto" ColumnSpacing="11"
+              VerticalOptions="Center">
+            <Border WidthRequest="42" HeightRequest="42"
+                    Stroke="{DynamicResource Border}" StrokeThickness="1"
+                    BackgroundColor="{DynamicResource Surface}"
+                    StrokeShape="RoundRectangle 14">
+                <Label Text="A" FontSize="22" FontAttributes="Bold"
+                       TextColor="{DynamicResource Accent}"
                        HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
             </Border>
             <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
                 <Label Text="Agent" FontSize="20" FontAttributes="Bold"
                        SemanticProperties.HeadingLevel="Level1" />
-                <Label Text="AMBIENTE DE DESENVOLVIMENTO" FontSize="9" CharacterSpacing="1.2"
+                <Label Text="ESPAÇO DE TRABALHO" FontSize="9" CharacterSpacing="1.1"
                        TextColor="{DynamicResource TextMuted}" />
             </VerticalStackLayout>
-            <Border Grid.Column="2" Padding="10,7" BackgroundColor="{DynamicResource AccentSurface}"
-                    StrokeThickness="0" StrokeShape="RoundRectangle 20" VerticalOptions="Center">
+            <Border Grid.Column="2" Padding="9,7"
+                    BackgroundColor="{DynamicResource SurfaceRaised}"
+                    StrokeThickness="0" StrokeShape="RoundRectangle 20"
+                    VerticalOptions="Center">
                 <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
-                    <Ellipse WidthRequest="6" HeightRequest="6" Fill="{DynamicResource Warning}" />
-                    <Label Text="CONEXÃO PENDENTE" FontSize="10" FontAttributes="Bold" TextColor="{DynamicResource Accent}" />
+                    <Ellipse WidthRequest="7" HeightRequest="7"
+                             Fill="{DynamicResource Warning}" />
+                    <Label Text="OFFLINE" FontSize="9" FontAttributes="Bold"
+                           TextColor="{DynamicResource Warning}" />
                 </HorizontalStackLayout>
             </Border>
         </Grid>
 
-        <!-- Workspace selector -->
-        <Border Grid.Row="1" Padding="12,10" BackgroundColor="{DynamicResource Surface}"
-                Stroke="{DynamicResource Border}" StrokeThickness="1" StrokeShape="RoundRectangle 15">
-            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
-                <Border WidthRequest="32" HeightRequest="32" BackgroundColor="{DynamicResource SurfaceSubtle}"
+        <Border Grid.Row="1" Padding="12,10"
+                BackgroundColor="{DynamicResource Surface}"
+                Stroke="{DynamicResource Border}" StrokeThickness="1"
+                StrokeShape="RoundRectangle 14">
+            <Grid ColumnDefinitions="34,*" ColumnSpacing="10">
+                <Border WidthRequest="32" HeightRequest="32"
+                        BackgroundColor="{DynamicResource SurfaceSubtle}"
                         StrokeThickness="0" StrokeShape="RoundRectangle 10">
                     <Label Text="⌘" FontSize="17" TextColor="{DynamicResource Accent}"
                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 </Border>
                 <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
-                    <Label Text="WORKSPACE" FontSize="9" CharacterSpacing="1" TextColor="{DynamicResource TextMuted}" />
-                    <Label Text="Workspace ainda não selecionado" FontSize="12" FontAttributes="Bold"
-                           LineBreakMode="TailTruncation" />
+                    <Label Text="WORKSPACE" FontSize="9" CharacterSpacing="1"
+                           TextColor="{DynamicResource TextMuted}" />
+                    <Label Text="Nenhum projeto selecionado" FontSize="12"
+                           FontAttributes="Bold" />
                 </VerticalStackLayout>
             </Grid>
         </Border>
 
-        <!-- Conversation preview -->
         <ScrollView Grid.Row="2" VerticalScrollBarVisibility="Never">
-            <VerticalStackLayout Spacing="17" Padding="0,4,0,16">
-                <Border Padding="10,7" HorizontalOptions="Center" BackgroundColor="{DynamicResource Surface}"
-                        Stroke="{DynamicResource Border}" StrokeThickness="1" StrokeShape="RoundRectangle 18">
-                    <Label Text="CONVERSA DE EXEMPLO · NÃO ENVIADA AO ASSISTENTE" FontSize="9" CharacterSpacing="0.7"
-                           TextColor="{DynamicResource TextMuted}" />
-                </Border>
-
-                <VerticalStackLayout Spacing="7" HorizontalOptions="End" MaximumWidthRequest="310">
-                    <Label Text="VOCÊ" FontSize="9" CharacterSpacing="1.1" TextColor="{DynamicResource TextMuted}"
-                           HorizontalTextAlignment="End" />
-                    <Border Padding="14,12" BackgroundColor="{DynamicResource SurfaceRaised}" StrokeThickness="0"
-                            StrokeShape="RoundRectangle 18">
-                        <Label Text="Revise a estrutura do projeto e proponha uma organização inicial para o cliente mobile." 
-                               FontSize="14" LineHeight="1.3" />
-                    </Border>
-                </VerticalStackLayout>
-
-                <Grid ColumnDefinitions="34,*" ColumnSpacing="10">
-                    <Border WidthRequest="32" HeightRequest="32" BackgroundColor="{DynamicResource AccentSurface}"
-                            StrokeThickness="0" StrokeShape="RoundRectangle 11" VerticalOptions="Start">
-                        <Label Text="C" FontSize="16" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
-                               HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                    </Border>
-                    <VerticalStackLayout Grid.Column="1" Spacing="9">
-                        <Grid ColumnDefinitions="*,Auto">
-                            <Label Text="CODEX" FontSize="10" CharacterSpacing="1.1" FontAttributes="Bold"
-                                   TextColor="{DynamicResource Accent}" VerticalTextAlignment="Center" />
-                            <Label Grid.Column="1" Text="RESPOSTA ILUSTRATIVA" FontSize="8" CharacterSpacing="0.5"
-                                   TextColor="{DynamicResource TextMuted}" VerticalTextAlignment="Center" />
-                        </Grid>
-                        <Label Text="Eu começaria separando a interface, a comunicação com o App Server e o runtime nativo. Assim, cada parte pode evoluir sem acoplar a experiência mobile aos detalhes do processo." 
-                               FontSize="14" LineHeight="1.35" />
-                        <Border Padding="12" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
-                                StrokeThickness="1" StrokeShape="RoundRectangle 14">
-                            <VerticalStackLayout Spacing="8">
-                                <Grid ColumnDefinitions="Auto,*,Auto">
-                                    <Label Text="ESTRUTURA SUGERIDA" FontSize="9" CharacterSpacing="0.8"
-                                           FontAttributes="Bold" TextColor="{DynamicResource TextSecondary}" />
-                                    <Label Grid.Column="2" Text="3 MÓDULOS" FontSize="8" TextColor="{DynamicResource TextMuted}" />
-                                </Grid>
-                                <Border Padding="10,8" BackgroundColor="{DynamicResource CodeSurface}" StrokeThickness="0"
-                                        StrokeShape="RoundRectangle 9">
-                                    <VerticalStackLayout Spacing="5">
-                                        <Label Text="Agent.Mobile" FontFamily="monospace" FontSize="12"
-                                               TextColor="{DynamicResource Accent}" />
-                                        <Label Text="  └─ Interface · MVVM · navegação" FontFamily="monospace" FontSize="10"
-                                               TextColor="{DynamicResource TextSecondary}" />
-                                        <Label Text="Agent.Core" FontFamily="monospace" FontSize="12"
-                                               TextColor="{DynamicResource Success}" />
-                                        <Label Text="  └─ JSON-RPC · sessões · eventos" FontFamily="monospace" FontSize="10"
-                                               TextColor="{DynamicResource TextSecondary}" />
-                                        <Label Text="CodexNativeHost" FontFamily="monospace" FontSize="12"
-                                               TextColor="{DynamicResource Warning}" />
-                                        <Label Text="  └─ Processo · pipes · Rust host" FontFamily="monospace" FontSize="10"
-                                               TextColor="{DynamicResource TextSecondary}" />
-                                    </VerticalStackLayout>
-                                </Border>
-                                <Label Text="A separação é uma proposta inicial. O runtime Android ainda precisa passar pelo teste de viabilidade." 
-                                       FontSize="11" TextColor="{DynamicResource TextSecondary}" />
-                            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="14" Padding="0,8,0,18">
+                <Border Padding="18" BackgroundColor="{DynamicResource Surface}"
+                        Stroke="{DynamicResource Border}" StrokeThickness="1"
+                        StrokeShape="RoundRectangle 20">
+                    <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <Border WidthRequest="58" HeightRequest="58"
+                                BackgroundColor="{DynamicResource AccentSurface}"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 19"
+                                HorizontalOptions="Center">
+                            <Label Text="C" FontSize="28" FontAttributes="Bold"
+                                   TextColor="{DynamicResource Accent}"
+                                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                        </Border>
+                        <Label Text="Conecte o runtime do Codex" FontSize="17"
+                               FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                        <Label Text="Quando o App Server estiver integrado, suas conversas e tarefas aparecerão aqui. Nenhuma mensagem será enviada enquanto a conexão estiver indisponível." 
+                               FontSize="12" LineHeight="1.3"
+                               TextColor="{DynamicResource TextSecondary}"
+                               HorizontalTextAlignment="Center" />
+                        <Border Padding="9,6" BackgroundColor="{DynamicResource SurfaceRaised}"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                            <Label Text="RUNTIME NÃO CONECTADO NESTA BUILD"
+                                   FontSize="9" FontAttributes="Bold" CharacterSpacing="0.4"
+                                   TextColor="{DynamicResource Warning}" />
                         </Border>
                     </VerticalStackLayout>
+                </Border>
+
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                    <Border Padding="10" BackgroundColor="{DynamicResource Surface}"
+                            Stroke="{DynamicResource Border}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 13">
+                        <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                            <Label Text="CHAT" FontSize="10" FontAttributes="Bold"
+                                   TextColor="{DynamicResource Accent}" />
+                            <Label Text="Aguardando" FontSize="9"
+                                   TextColor="{DynamicResource TextSecondary}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Column="1" Padding="10" BackgroundColor="{DynamicResource Surface}"
+                            Stroke="{DynamicResource Border}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 13">
+                        <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                            <Label Text="TOOLS" FontSize="10" FontAttributes="Bold"
+                                   TextColor="{DynamicResource Accent}" />
+                            <Label Text="Aguardando" FontSize="9"
+                                   TextColor="{DynamicResource TextSecondary}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Grid.Column="2" Padding="10" BackgroundColor="{DynamicResource Surface}"
+                            Stroke="{DynamicResource Border}" StrokeThickness="1"
+                            StrokeShape="RoundRectangle 13">
+                        <VerticalStackLayout Spacing="4" HorizontalOptions="Center">
+                            <Label Text="REVIEW" FontSize="10" FontAttributes="Bold"
+                                   TextColor="{DynamicResource Accent}" />
+                            <Label Text="Aguardando" FontSize="9"
+                                   TextColor="{DynamicResource TextSecondary}" />
+                        </VerticalStackLayout>
+                    </Border>
                 </Grid>
 
-                <VerticalStackLayout Spacing="7">
-                    <Label Text="INTERFACE DECLARATIVA" FontSize="9" CharacterSpacing="0.9"
-                           FontAttributes="Bold" TextColor="{DynamicResource TextMuted}" />
-                    <ContentView x:Name="AgentUiHost" IsVisible="False" />
-                </VerticalStackLayout>
-
-                <!-- Approval preview -->
-                <Border Padding="13" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Warning}"
-                        StrokeThickness="1" StrokeShape="RoundRectangle 15">
-                    <VerticalStackLayout Spacing="9">
-                        <HorizontalStackLayout Spacing="7">
-                            <Label Text="◷" FontSize="15" TextColor="{DynamicResource Warning}" />
-                            <Label Text="APROVAÇÃO NECESSÁRIA" FontSize="9" CharacterSpacing="0.8"
-                                   FontAttributes="Bold" TextColor="{DynamicResource Warning}" VerticalTextAlignment="Center" />
-                        </HorizontalStackLayout>
-                        <Label Text="O Codex quer executar um comando no workspace." FontSize="13" FontAttributes="Bold" />
-                        <Border Padding="10,8" BackgroundColor="{DynamicResource CodeSurface}" StrokeThickness="0"
-                                StrokeShape="RoundRectangle 9">
-                            <Label Text="dotnet test" FontFamily="monospace" FontSize="12" />
-                        </Border>
-                        <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
-                            <Button Text="Recusar" IsEnabled="False" BackgroundColor="{DynamicResource SurfaceRaised}"
-                                    TextColor="{DynamicResource TextSecondary}" />
-                            <Button Grid.Column="1" Text="Aprovar" IsEnabled="False" BackgroundColor="{DynamicResource AccentStrong}"
-                                    TextColor="#FFFFFF" />
-                        </Grid>
-                        <Label Text="Controles ilustrativos · não executam comandos nesta prévia" FontSize="9"
-                               TextColor="{DynamicResource TextMuted}" />
-                    </VerticalStackLayout>
-                </Border>
+                <ContentView x:Name="AgentUiHost" IsVisible="False" />
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Composer: intentionally disabled until a verified runtime is connected -->
-        <Border Grid.Row="3" Padding="12,10" BackgroundColor="{DynamicResource Surface}"
-                Stroke="{DynamicResource Border}" StrokeThickness="1" StrokeShape="RoundRectangle 18">
-            <VerticalStackLayout Spacing="9">
-                <Editor Placeholder="Descreva a tarefa que o Codex deve realizar..." HeightRequest="62"
-                        AutoSize="TextChanges" IsEnabled="False"
+        <Border Grid.Row="3" Padding="12,10"
+                BackgroundColor="{DynamicResource Surface}"
+                Stroke="{DynamicResource Border}" StrokeThickness="1"
+                StrokeShape="RoundRectangle 18">
+            <VerticalStackLayout Spacing="8">
+                <Editor Placeholder="Conecte o Codex para começar uma conversa..."
+                        HeightRequest="56" AutoSize="TextChanges" IsEnabled="False"
                         SemanticProperties.Description="Campo de mensagem, aguardando conexão com o Codex" />
                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
-                    <Button Text="＋" WidthRequest="38" HeightRequest="36" Padding="0" FontSize="20"
-                            IsEnabled="False" BackgroundColor="{DynamicResource SurfaceRaised}" />
-                    <Label Grid.Column="1" Text="Aguardando conexão com o runtime" FontSize="10"
-                           TextColor="{DynamicResource TextMuted}" VerticalTextAlignment="Center" />
-                    <Button Grid.Column="2" Text="↑" WidthRequest="38" HeightRequest="36" Padding="0" FontSize="20"
-                            IsEnabled="False" BackgroundColor="{DynamicResource AccentStrong}" />
+                    <Button Text="＋" WidthRequest="44" HeightRequest="44" Padding="0"
+                            FontSize="20" IsEnabled="False"
+                            BackgroundColor="{DynamicResource SurfaceRaised}"
+                            SemanticProperties.Description="Anexar arquivo, indisponível sem runtime" />
+                    <Label Grid.Column="1" Text="Aguardando conexão segura"
+                           FontSize="10" TextColor="{DynamicResource TextMuted}"
+                           VerticalTextAlignment="Center" />
+                    <Button Grid.Column="2" Text="↑" WidthRequest="44" HeightRequest="44"
+                            Padding="0" FontSize="20" IsEnabled="False"
+                            BackgroundColor="{DynamicResource AccentStrong}"
+                            SemanticProperties.Description="Enviar mensagem, indisponível sem runtime" />
                 </Grid>
             </VerticalStackLayout>
         </Border>
