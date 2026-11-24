@@ -4,125 +4,147 @@
              x:Class="Agent.Mobile.Pages.MorePage"
              BackgroundColor="{DynamicResource AppBackground}"
              Shell.NavBarIsVisible="False">
-    <ScrollView>
-        <VerticalStackLayout Padding="20,25,20,30" Spacing="17">
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Padding="20,24,20,30" Spacing="17"
+                             HorizontalOptions="Center" MaximumWidthRequest="620">
             <VerticalStackLayout Spacing="4">
-                <Label Text="Mais" FontSize="28" FontAttributes="Bold" SemanticProperties.HeadingLevel="Level1" />
-                <Label Text="Histórico, contexto do projeto, ferramentas e configurações."
-                       FontSize="12" TextColor="{DynamicResource TextSecondary}" />
+                <Label Text="Mais" FontSize="29" FontAttributes="Bold"
+                       SemanticProperties.HeadingLevel="Level1" />
+                <Label Text="Ferramentas, informações e preferências do Agent."
+                       FontSize="13" TextColor="{DynamicResource TextSecondary}" />
             </VerticalStackLayout>
 
-            <Border Padding="15" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
-                    StrokeThickness="1" StrokeShape="RoundRectangle 18">
-                <Grid ColumnDefinitions="38,*" ColumnSpacing="11">
-                    <Border WidthRequest="36" HeightRequest="36" BackgroundColor="{DynamicResource AccentSurface}"
-                            StrokeThickness="0" StrokeShape="RoundRectangle 12">
-                        <Label Text="A" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
+            <Border Padding="15" BackgroundColor="{DynamicResource AccentSurface}"
+                    StrokeThickness="0" StrokeShape="RoundRectangle 17">
+                <Grid ColumnDefinitions="42,*" ColumnSpacing="11">
+                    <Border WidthRequest="40" HeightRequest="40"
+                            BackgroundColor="{DynamicResource Surface}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 13">
+                        <Label Text="A" FontSize="19" FontAttributes="Bold"
+                               TextColor="{DynamicResource Accent}"
                                HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                     </Border>
                     <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
-                        <Label Text="Agent" FontSize="14" FontAttributes="Bold" />
-                        <Label Text="Cliente público em preparação · Microsoft + Codex"
-                               FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                        <Label Text="Agent Android" FontSize="14" FontAttributes="Bold" />
+                        <Label Text="Alpha · interface em validação" FontSize="11"
+                               TextColor="{DynamicResource TextSecondary}" />
                     </VerticalStackLayout>
                 </Grid>
             </Border>
 
-            <Label Text="PROJETO E CONHECIMENTO" FontSize="10" CharacterSpacing="1.1"
-                   TextColor="{DynamicResource TextMuted}" />
+            <Label Text="PROJETO E CONHECIMENTO" FontSize="10" CharacterSpacing="1.2"
+                   FontAttributes="Bold" TextColor="{DynamicResource TextMuted}" />
             <VerticalStackLayout Spacing="9">
-                <Border Padding="12" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
-                        StrokeThickness="1" StrokeShape="RoundRectangle 15">
-                    <Grid ColumnDefinitions="38,*,Auto" ColumnSpacing="10" MinimumHeightRequest="42">
-                        <Border WidthRequest="36" HeightRequest="36" BackgroundColor="{DynamicResource AccentSurface}"
-                                StrokeThickness="0" StrokeShape="RoundRectangle 11">
-                            <Label Text="⌕" FontSize="22" TextColor="{DynamicResource Accent}"
+                <Border Padding="13" BackgroundColor="{DynamicResource Surface}"
+                        Stroke="{DynamicResource Border}" StrokeThickness="1"
+                        StrokeShape="RoundRectangle 16"
+                        SemanticProperties.Description="Abrir contexto do projeto: navegação semântica, documentação e regras de arquitetura">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnContextTapped" />
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="42,*,Auto" ColumnSpacing="11" MinimumHeightRequest="48">
+                        <Border WidthRequest="40" HeightRequest="40"
+                                BackgroundColor="{DynamicResource AccentSurface}"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 13">
+                            <Label Text="⌕" FontSize="23" TextColor="{DynamicResource Accent}"
                                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                         </Border>
-                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
-                            <Label Text="Contexto do projeto" FontSize="12" FontAttributes="Bold" />
-                            <Label Text="Semântica, documentação e arquitetura" FontSize="9"
+                        <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                            <Label Text="Contexto do projeto" FontSize="13" FontAttributes="Bold" />
+                            <Label Text="Semântica, documentação e arquitetura" FontSize="10"
                                    TextColor="{DynamicResource TextSecondary}" />
                         </VerticalStackLayout>
-                        <Label Grid.Column="2" Text="›" FontSize="24" TextColor="{DynamicResource TextMuted}"
+                        <Label Grid.Column="2" Text="›" FontSize="25"
+                               TextColor="{DynamicResource TextMuted}"
                                VerticalTextAlignment="Center" />
-                        <Button Grid.ColumnSpan="3" Text="" Padding="0" BackgroundColor="Transparent"
-                                BorderWidth="0" Clicked="OnContextClicked"
-                                SemanticProperties.Description="Abrir contexto do projeto: navegação semântica, documentação e regras de arquitetura" />
                     </Grid>
                 </Border>
 
-                <Border Padding="12" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
-                        StrokeThickness="1" StrokeShape="RoundRectangle 15">
-                    <Grid ColumnDefinitions="38,*,Auto" ColumnSpacing="10" MinimumHeightRequest="42">
-                        <Border WidthRequest="36" HeightRequest="36" BackgroundColor="{DynamicResource AccentSurface}"
-                                StrokeThickness="0" StrokeShape="RoundRectangle 11">
-                            <Label Text="◫" FontSize="19" TextColor="{DynamicResource Accent}"
+                <Border Padding="13" BackgroundColor="{DynamicResource Surface}"
+                        Stroke="{DynamicResource Border}" StrokeThickness="1"
+                        StrokeShape="RoundRectangle 16"
+                        SemanticProperties.Description="Abrir plugins e ferramentas do Codex">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPluginsTapped" />
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="42,*,Auto" ColumnSpacing="11" MinimumHeightRequest="48">
+                        <Border WidthRequest="40" HeightRequest="40"
+                                BackgroundColor="{DynamicResource AccentSurface}"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 13">
+                            <Label Text="◫" FontSize="20" TextColor="{DynamicResource Accent}"
                                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                         </Border>
-                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
-                            <Label Text="Plugins e ferramentas" FontSize="12" FontAttributes="Bold" />
-                            <Label Text="Conectores e ferramentas do Codex" FontSize="9"
+                        <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                            <Label Text="Plugins e ferramentas" FontSize="13" FontAttributes="Bold" />
+                            <Label Text="Conectores e recursos do Codex" FontSize="10"
                                    TextColor="{DynamicResource TextSecondary}" />
                         </VerticalStackLayout>
-                        <Label Grid.Column="2" Text="›" FontSize="24" TextColor="{DynamicResource TextMuted}"
+                        <Label Grid.Column="2" Text="›" FontSize="25"
+                               TextColor="{DynamicResource TextMuted}"
                                VerticalTextAlignment="Center" />
-                        <Button Grid.ColumnSpan="3" Text="" Padding="0" BackgroundColor="Transparent"
-                                BorderWidth="0" Clicked="OnPluginsClicked"
-                                SemanticProperties.Description="Abrir plugins e ferramentas do Codex" />
                     </Grid>
                 </Border>
 
-                <Border Padding="12" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
-                        StrokeThickness="1" StrokeShape="RoundRectangle 15">
-                    <Grid ColumnDefinitions="38,*,Auto" ColumnSpacing="10" MinimumHeightRequest="42">
-                        <Border WidthRequest="36" HeightRequest="36" BackgroundColor="{DynamicResource AccentSurface}"
-                                StrokeThickness="0" StrokeShape="RoundRectangle 11">
-                            <Label Text="◷" FontSize="20" TextColor="{DynamicResource Accent}"
+                <Border Padding="13" BackgroundColor="{DynamicResource Surface}"
+                        Stroke="{DynamicResource Border}" StrokeThickness="1"
+                        StrokeShape="RoundRectangle 16"
+                        SemanticProperties.Description="Abrir o histórico de conversas do Codex">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnHistoryTapped" />
+                    </Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="42,*,Auto" ColumnSpacing="11" MinimumHeightRequest="48">
+                        <Border WidthRequest="40" HeightRequest="40"
+                                BackgroundColor="{DynamicResource AccentSurface}"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 13">
+                            <Label Text="◷" FontSize="21" TextColor="{DynamicResource Accent}"
                                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                         </Border>
-                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
-                            <Label Text="Histórico de conversas" FontSize="12" FontAttributes="Bold" />
-                            <Label Text="Sessões e tarefas anteriores" FontSize="9"
+                        <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                            <Label Text="Histórico de conversas" FontSize="13" FontAttributes="Bold" />
+                            <Label Text="Sessões e tarefas anteriores" FontSize="10"
                                    TextColor="{DynamicResource TextSecondary}" />
                         </VerticalStackLayout>
-                        <Label Grid.Column="2" Text="›" FontSize="24" TextColor="{DynamicResource TextMuted}"
+                        <Label Grid.Column="2" Text="›" FontSize="25"
+                               TextColor="{DynamicResource TextMuted}"
                                VerticalTextAlignment="Center" />
-                        <Button Grid.ColumnSpan="3" Text="" Padding="0" BackgroundColor="Transparent"
-                                BorderWidth="0" Clicked="OnHistoryClicked"
-                                SemanticProperties.Description="Abrir o histórico de conversas do Codex" />
                     </Grid>
                 </Border>
             </VerticalStackLayout>
 
-            <Label Text="APLICATIVO" FontSize="10" CharacterSpacing="1.1" TextColor="{DynamicResource TextMuted}" />
-            <Border Padding="12" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
-                    StrokeThickness="1" StrokeShape="RoundRectangle 15">
-                <Grid ColumnDefinitions="38,*,Auto" ColumnSpacing="10" MinimumHeightRequest="42">
-                    <Border WidthRequest="36" HeightRequest="36" BackgroundColor="{DynamicResource SurfaceSubtle}"
-                            StrokeThickness="0" StrokeShape="RoundRectangle 11">
-                        <Label Text="⚙" FontSize="19" TextColor="{DynamicResource Accent}"
+            <Label Text="APLICATIVO" FontSize="10" CharacterSpacing="1.2"
+                   FontAttributes="Bold" TextColor="{DynamicResource TextMuted}" />
+            <Border Padding="13" BackgroundColor="{DynamicResource Surface}"
+                    Stroke="{DynamicResource Border}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16"
+                    SemanticProperties.Description="Abrir os ajustes do aplicativo">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnSettingsTapped" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="42,*,Auto" ColumnSpacing="11" MinimumHeightRequest="48">
+                    <Border WidthRequest="40" HeightRequest="40"
+                            BackgroundColor="{DynamicResource SurfaceSubtle}"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 13">
+                        <Label Text="⚙" FontSize="20" TextColor="{DynamicResource Accent}"
                                HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                     </Border>
-                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
-                        <Label Text="Ajustes" FontSize="12" FontAttributes="Bold" />
-                        <Label Text="Conta Microsoft, acesso Codex e armazenamento" FontSize="9"
+                    <VerticalStackLayout Grid.Column="1" Spacing="3" VerticalOptions="Center">
+                        <Label Text="Ajustes" FontSize="13" FontAttributes="Bold" />
+                        <Label Text="Tema, estilo de resposta e endereço da API" FontSize="10"
                                TextColor="{DynamicResource TextSecondary}" />
                     </VerticalStackLayout>
-                    <Label Grid.Column="2" Text="›" FontSize="24" TextColor="{DynamicResource TextMuted}"
+                    <Label Grid.Column="2" Text="›" FontSize="25"
+                           TextColor="{DynamicResource TextMuted}"
                            VerticalTextAlignment="Center" />
-                    <Button Grid.ColumnSpan="3" Text="" Padding="0" BackgroundColor="Transparent"
-                            BorderWidth="0" Clicked="OnSettingsClicked"
-                            SemanticProperties.Description="Abrir os ajustes do aplicativo" />
                 </Grid>
             </Border>
 
-            <Border Padding="14" BackgroundColor="{DynamicResource SurfaceSubtle}" StrokeThickness="0"
-                    StrokeShape="RoundRectangle 16">
+            <Border Padding="14" BackgroundColor="{DynamicResource SurfaceRaised}"
+                    StrokeThickness="0" StrokeShape="RoundRectangle 16">
                 <VerticalStackLayout Spacing="4">
-                    <Label Text="Estado do desenvolvimento" FontSize="12" FontAttributes="Bold" />
-                    <Label Text="Interface em preparação · runtime Codex e serviços de backend ainda não conectados."
-                           FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                    <Label Text="Estado desta versão" FontSize="12" FontAttributes="Bold" />
+                    <Label Text="A navegação local e as preferências estão disponíveis. Login, runtime Codex e conectores ainda não foram integrados a esta build." 
+                           FontSize="10" LineHeight="1.25"
+                           TextColor="{DynamicResource TextSecondary}" />
                 </VerticalStackLayout>
             </Border>
         </VerticalStackLayout>
