@@ -25,7 +25,7 @@ public sealed class RustAiStoCompiler : IAiStoCompiler, IAsyncDisposable
     public RustAiStoCompiler(IConfiguration configuration, ILogger<RustAiStoCompiler> logger)
     {
         _executablePath = configuration["AiStoWorker:ExecutablePath"]
-            ?? Path.Combine("workers", "aisto-worker", "target", "release", "aisto-worker");
+            ?? Path.Combine("workers", "aisto-workers", "target", "release", "aisto-worker");
         _logger = logger;
 
         var configuredSeconds = configuration.GetValue<int?>("AiStoWorker:TimeoutSeconds") ?? 15;
@@ -101,7 +101,6 @@ public sealed class RustAiStoCompiler : IAiStoCompiler, IAsyncDisposable
             var payload = new WorkerRequest(requestId, "compile_aisto",
                 request.AgentName, request.Configuration, request.Capabilities);
 
-            // Stream JSON directly to stdin instead of allocating a serialized JSON string.
             var input = process.StandardInput.BaseStream;
             await JsonSerializer.SerializeAsync(input, payload, JsonOptions, workerToken);
             await input.WriteAsync(NewLine, workerToken);
@@ -153,7 +152,7 @@ public sealed class RustAiStoCompiler : IAiStoCompiler, IAsyncDisposable
         catch (OperationCanceledException) when (!requestToken.IsCancellationRequested)
         {
             StopWorker(slot);
-            throw new AiStoWorkerTimeoutException("The Rust AiSTo worker exceeded its response deadline.");
+            throw new AiStoWorkerTimeoutException("The AiSTo Rust worker exceeded its response deadline.");
         }
         catch (OperationCanceledException)
         {
