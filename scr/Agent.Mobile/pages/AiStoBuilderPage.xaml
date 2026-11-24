@@ -34,11 +34,11 @@
                         </Grid>
                         <Label Text="Artificial Intelligence Specialized in Tools" FontSize="10"
                                TextColor="{DynamicResource TextSecondary}" />
-                        <Label Text="Configure um especialista para um assunto específico. O Codex continua sendo o motor de IA; o AiSTo organiza instruções, contexto, documentação e ferramentas para orientar o trabalho." 
+                        <Label Text="Configure um especialista para um assunto específico. O Codex continua sendo o motor de IA; o AiSTo organiza instruções, contexto, documentação e ferramentas para orientar o trabalho."
                                FontSize="12" LineHeight="1.25" />
-                        <Label Text="Isso não treina um novo modelo nem cria outro provedor: é uma configuração especializada aplicada ao Codex quando o backend estiver conectado." 
+                        <Label Text="Isso não treina um novo modelo nem cria outro provedor: é uma configuração especializada aplicada ao Codex quando o backend estiver conectado."
                                FontSize="10" TextColor="{DynamicResource TextSecondary}" />
-                        <Label Text="Exemplo: um especialista em grandes projetos pode priorizar arquitetura, dependências, documentação oficial e revisão cuidadosa de mudanças." 
+                        <Label Text="Exemplo: um especialista em grandes projetos pode priorizar arquitetura, dependências, documentação oficial e revisão cuidadosa de mudanças."
                                FontSize="10" TextColor="{DynamicResource TextSecondary}" />
                     </VerticalStackLayout>
                 </Border>
@@ -53,7 +53,7 @@
                             <Label Grid.Column="1" Text="AGUARDANDO RUNTIME" FontSize="9" FontAttributes="Bold"
                                    TextColor="{DynamicResource Warning}" />
                         </Grid>
-                        <Label Text="Descreva o especialista uma única vez. O Codex poderá analisar o contexto disponível, consultar a documentação oficial e propor identidade, objetivo, instruções e ferramentas sem pedir que você preencha cada campo." 
+                        <Label Text="Descreva o especialista uma única vez. O Codex poderá analisar o contexto disponível, consultar a documentação oficial e propor identidade, objetivo, instruções e ferramentas sem pedir que você preencha cada campo."
                                FontSize="12" LineHeight="1.25" />
                         <Editor x:Name="AiStoDraftBriefEditor" HeightRequest="104" AutoSize="TextChanges" IsEnabled="False"
                                 MaxLength="4000" Placeholder="Ex.: Quero um especialista em Rust para projetos grandes. Deve analisar arquitetura, consultar a documentação oficial, revisar código e explicar decisões..."
@@ -61,7 +61,7 @@
                         <Button Text="Gerar rascunho com Codex" IsEnabled="False" FontSize="12"
                                 BackgroundColor="{DynamicResource SurfaceRaised}"
                                 TextColor="{DynamicResource TextSecondary}" />
-                        <Label Text="A geração automática está preparada no núcleo AiSTo, mas será ativada quando o App Server nativo passar pelo teste de viabilidade e for incluído no Android. Nenhuma resposta ou conexão é simulada nesta versão." 
+                        <Label Text="A geração automática está preparada no núcleo AiSTo, mas será ativada quando o App Server nativo passar pelo teste de viabilidade e for incluído no Android. Nenhuma resposta ou conexão é simulada nesta versão."
                                FontSize="10" TextColor="{DynamicResource TextSecondary}" />
                     </VerticalStackLayout>
                 </Border>
@@ -184,7 +184,7 @@
                         StrokeShape="RoundRectangle 17">
                     <VerticalStackLayout Spacing="9">
                         <Label Text="Documentação de referência" FontSize="12" FontAttributes="Bold" />
-                        <Label Text="Adicione URLs HTTPS de documentação oficial, uma por linha. Nesta etapa elas serão salvas como referências; a consulta e a atualização serão feitas pelo backend. Não use links assinados, tokens ou URLs privadas." 
+                        <Label Text="Adicione URLs HTTPS de documentação oficial, uma por linha. Nesta etapa elas serão salvas como referências; a consulta e a atualização serão feitas pelo backend. Não use links assinados, tokens ou URLs privadas."
                                FontSize="10" TextColor="{DynamicResource TextSecondary}" />
                         <Editor Placeholder="https://doc.rust-lang.org/book/&#10;https://learn.microsoft.com/dotnet/maui/"
                                 AutoSize="TextChanges" HeightRequest="90" MaxLength="4000"
@@ -246,4 +246,56 @@
                             <VerticalStackLayout Spacing="4">
                                 <Label Text="Proteção obrigatória" FontSize="11" FontAttributes="Bold"
                                        TextColor="{DynamicResource Accent}" />
-                              
+                                <Label Text="As opções abaixo descrevem as ferramentas que o especialista poderá solicitar ao runtime. Elas não concedem acesso por conta própria; o backend e a seleção explícita do usuário continuam responsáveis por autorizar cada operação."
+                                       FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                                <Label Text="A escrita exige leitura do repositório. Alterações devem ser apresentadas como diff revisável e não devem ser aplicadas ou publicadas sem aprovação explícita."
+                                       FontSize="10" TextColor="{DynamicResource TextSecondary}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Padding="14" BackgroundColor="{DynamicResource Surface}"
+                        Stroke="{DynamicResource Border}" StrokeThickness="1"
+                        StrokeShape="RoundRectangle 17">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Prévia do especialista" FontSize="13" FontAttributes="Bold" />
+                        <Label Text="{Binding PreviewName}" FontSize="16" FontAttributes="Bold"
+                               TextColor="{DynamicResource Accent}" />
+                        <Label Text="{Binding PreviewDomain}" FontSize="11"
+                               TextColor="{DynamicResource TextSecondary}" />
+                        <Label Text="{Binding PreviewObjective}" FontSize="11" />
+                        <Label Text="{Binding PreviewDetails}" FontSize="10"
+                               TextColor="{DynamicResource TextMuted}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Padding="12" BackgroundColor="{DynamicResource Surface}"
+                        Stroke="{DynamicResource Danger}" StrokeThickness="1"
+                        StrokeShape="RoundRectangle 13"
+                        IsVisible="{Binding HasError}">
+                    <Label Text="{Binding ErrorMessage}" FontSize="11"
+                           TextColor="{DynamicResource Danger}" />
+                </Border>
+
+                <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                                   Color="{DynamicResource Accent}" HorizontalOptions="Center" />
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="9">
+                    <Button Text="Cancelar" Grid.Column="0" FontSize="12"
+                            BackgroundColor="{DynamicResource SurfaceRaised}"
+                            Clicked="OnCancelClicked" />
+                    <Button Text="{Binding SaveButtonText}" Grid.Column="1" FontSize="12"
+                            BackgroundColor="{DynamicResource AccentStrong}"
+                            Clicked="OnSaveClicked" />
+                </Grid>
+
+                <Button Text="Remover especialização AiSTo" FontSize="11"
+                        BackgroundColor="{DynamicResource SurfaceRaised}"
+                        TextColor="{DynamicResource Danger}"
+                        IsVisible="{Binding CanRemoveAiSto}"
+                        Clicked="OnRemoveAiStoClicked" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
