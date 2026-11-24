@@ -10,7 +10,7 @@ services:
       AGENT_DB_PASSWORD: ${AGENT_DB_PASSWORD:?Set AGENT_DB_PASSWORD in deploy/.env}
     volumes:
       - agent-postgres:/var/lib/postgresql/data
-      - ../database/postgres/migrations/001_initial_postgres.sql:/docker-entrypoint-initdb.d/001_initial_postgres.sql:ro
+      - ../scripts/001_initial_postgres.sql:/docker-entrypoint-initdb.d/001_initial_postgres.sql:ro
       - ./init-db.sh:/docker-entrypoint-initdb.d/002-init-agent.sh:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
