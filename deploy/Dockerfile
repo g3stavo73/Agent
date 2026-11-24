@@ -1,6 +1,6 @@
 # Rust worker and ASP.NET API are built with their own pinned toolchains.
 FROM rust:1.100.0-slim-bookworm AS worker-build
-WORKDIR /src
+WORKDIR /scr
 COPY workers/aisto-workers ./workers/aisto-workers
 COPY tests/worker_protocol.rs ./tests/worker_protocol.rs
 RUN cargo test --release --manifest-path workers/aisto-workers/Cargo.toml
