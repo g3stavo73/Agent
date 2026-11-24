@@ -52,7 +52,9 @@ jobs:
 
       - name: Restore dependencies
         run: |
-          dotnet restore scr/Agent.Mobile/Agent.Mobile.csproj
+          dotnet restore \
+            scr/Agent.Mobile/Agent.Mobile.csproj \
+            -p:PublishReadyToRun=false
 
       - name: Build and publish APK
         run: |
@@ -62,7 +64,8 @@ jobs:
             --framework net11.0-android37.2 \
             --no-restore \
             -p:AndroidPackageFormats=apk \
-            -p:AndroidKeyStore=false
+            -p:AndroidKeyStore=false \
+            -p:PublishReadyToRun=false
 
       - name: Locate APK
         shell: bash
