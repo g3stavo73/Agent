@@ -10,7 +10,7 @@ RUN cargo build --release --manifest-path workers/aisto-workers/Cargo.toml
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS api-build
 WORKDIR /src
 COPY . .
-WORKDIR /src/scr/Agent.Api
+WORKDIR /src/srcc/Agent.Api
 RUN dotnet --info
 RUN dotnet restore Agent.Api.csproj
 RUN dotnet publish Agent.Api.csproj --configuration Release --output /out --no-restore
