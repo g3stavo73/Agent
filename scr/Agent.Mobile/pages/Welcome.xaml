@@ -4,85 +4,142 @@
              x:Class="Agent.Mobile.Pages.WelcomePage"
              BackgroundColor="{DynamicResource AppBackground}"
              Shell.NavBarIsVisible="False">
-    <ScrollView>
-        <VerticalStackLayout Padding="24,46,24,32" Spacing="18" VerticalOptions="Center">
-            <Border WidthRequest="66" HeightRequest="66" HorizontalOptions="Center"
-                    BackgroundColor="{DynamicResource AccentSurface}" Stroke="{DynamicResource Border}"
-                    StrokeThickness="1" StrokeShape="RoundRectangle 22">
-                <Label Text="A" FontSize="34" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
-                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <VerticalStackLayout Padding="22,28,22,30"
+                             Spacing="18"
+                             HorizontalOptions="Center"
+                             MaximumWidthRequest="560">
+            <Grid ColumnDefinitions="54,*" ColumnSpacing="13">
+                <Border WidthRequest="52" HeightRequest="52"
+                        BackgroundColor="{DynamicResource AccentSurface}"
+                        Stroke="{DynamicResource Border}" StrokeThickness="1"
+                        StrokeShape="RoundRectangle 17">
+                    <Label Text="A" FontSize="29" FontAttributes="Bold"
+                           TextColor="{DynamicResource Accent}"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                </Border>
+                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                    <Label Text="AGENT" FontSize="12" CharacterSpacing="2.2"
+                           FontAttributes="Bold" TextColor="{DynamicResource Accent}" />
+                    <Label Text="Seu espaço de desenvolvimento" FontSize="19"
+                           FontAttributes="Bold" />
+                    <Label Text="Cliente Android · versão Alpha" FontSize="11"
+                           TextColor="{DynamicResource TextSecondary}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border Padding="19" BackgroundColor="{DynamicResource Surface}"
+                    Stroke="{DynamicResource Border}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 20">
+                <VerticalStackLayout Spacing="9">
+                    <Label Text="Código, contexto e assistência." FontSize="23"
+                           FontAttributes="Bold" LineBreakMode="WordWrap" />
+                    <Label Text="O Agent está em fase de integração. Esta versão permite explorar a interface; autenticação e execução ainda dependem de componentes que não estão ligados ao aplicativo Android." 
+                           FontSize="13" LineHeight="1.35"
+                           TextColor="{DynamicResource TextSecondary}" />
+                    <HorizontalStackLayout Spacing="8" Margin="0,3,0,0">
+                        <Border Padding="9,5" BackgroundColor="{DynamicResource AccentSurface}"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                            <Label Text="ALPHA" FontSize="9" FontAttributes="Bold"
+                                   TextColor="{DynamicResource Accent}" />
+                        </Border>
+                        <Border Padding="9,5" BackgroundColor="{DynamicResource SurfaceRaised}"
+                                StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                            <Label Text="PRÉVIA LOCAL" FontSize="9" FontAttributes="Bold"
+                                   TextColor="{DynamicResource TextSecondary}" />
+                        </Border>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
             </Border>
-            <VerticalStackLayout Spacing="5">
-                <Label Text="Agent" FontSize="28" FontAttributes="Bold"
-                       HorizontalTextAlignment="Center" SemanticProperties.HeadingLevel="Level1" />
-                <Label Text="Seu espaço de desenvolvimento com Codex" FontSize="12"
-                       TextColor="{DynamicResource TextSecondary}" HorizontalTextAlignment="Center" />
+
+            <VerticalStackLayout Spacing="10">
+                <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
+                    <Label Text="Contas e conexões" FontSize="16" FontAttributes="Bold" />
+                    <Label Grid.Column="1" Text="2 ETAPAS" FontSize="9"
+                           CharacterSpacing="1" TextColor="{DynamicResource TextMuted}"
+                           VerticalTextAlignment="Center" />
+                </Grid>
+
+                <Border Padding="15" BackgroundColor="{DynamicResource Surface}"
+                        Stroke="{DynamicResource Border}" StrokeThickness="1"
+                        StrokeShape="RoundRectangle 17">
+                    <VerticalStackLayout Spacing="9">
+                        <Grid ColumnDefinitions="42,*,Auto" ColumnSpacing="10">
+                            <Border WidthRequest="40" HeightRequest="40"
+                                    BackgroundColor="{DynamicResource SurfaceSubtle}"
+                                    StrokeThickness="0" StrokeShape="RoundRectangle 13">
+                                <Label Text="M" FontSize="20" FontAttributes="Bold"
+                                       TextColor="{DynamicResource Accent}"
+                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label Text="Conta Microsoft" FontSize="14" FontAttributes="Bold" />
+                                <Label Text="Identidade do aplicativo Agent" FontSize="11"
+                                       TextColor="{DynamicResource TextSecondary}" />
+                            </VerticalStackLayout>
+                            <Border Grid.Column="2" Padding="8,5"
+                                    BackgroundColor="{DynamicResource SurfaceRaised}"
+                                    StrokeThickness="0" StrokeShape="RoundRectangle 9"
+                                    VerticalOptions="Center">
+                                <Label Text="PENDENTE" FontSize="8" FontAttributes="Bold"
+                                       TextColor="{DynamicResource Warning}" />
+                            </Border>
+                        </Grid>
+                        <Label Text="O cliente Android ainda precisa da configuração MSAL (Client ID e URI de redirecionamento) para iniciar o login com segurança." 
+                               FontSize="11" LineHeight="1.25"
+                               TextColor="{DynamicResource TextSecondary}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Padding="15" BackgroundColor="{DynamicResource Surface}"
+                        Stroke="{DynamicResource Border}" StrokeThickness="1"
+                        StrokeShape="RoundRectangle 17">
+                    <VerticalStackLayout Spacing="9">
+                        <Grid ColumnDefinitions="42,*,Auto" ColumnSpacing="10">
+                            <Border WidthRequest="40" HeightRequest="40"
+                                    BackgroundColor="{DynamicResource AccentSurface}"
+                                    StrokeThickness="0" StrokeShape="RoundRectangle 13">
+                                <Label Text="C" FontSize="20" FontAttributes="Bold"
+                                       TextColor="{DynamicResource Accent}"
+                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <Label Text="Conta Codex" FontSize="14" FontAttributes="Bold" />
+                                <Label Text="Conexão separada da conta Microsoft" FontSize="11"
+                                       TextColor="{DynamicResource TextSecondary}" />
+                            </VerticalStackLayout>
+                            <Border Grid.Column="2" Padding="8,5"
+                                    BackgroundColor="{DynamicResource SurfaceRaised}"
+                                    StrokeThickness="0" StrokeShape="RoundRectangle 9"
+                                    VerticalOptions="Center">
+                                <Label Text="RUNTIME AUSENTE" FontSize="8" FontAttributes="Bold"
+                                       TextColor="{DynamicResource Warning}" />
+                            </Border>
+                        </Grid>
+                        <Label Text="O protocolo de login por código já existe no Agent.Core, mas o host nativo que inicia o Codex App Server ainda não está empacotado para Android." 
+                               FontSize="11" LineHeight="1.25"
+                               TextColor="{DynamicResource TextSecondary}" />
+                    </VerticalStackLayout>
+                </Border>
             </VerticalStackLayout>
 
-            <Border Padding="16" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
-                    StrokeThickness="1" StrokeShape="RoundRectangle 18">
-                <VerticalStackLayout Spacing="9">
-                    <Grid ColumnDefinitions="38,*,Auto" ColumnSpacing="10">
-                        <Border WidthRequest="36" HeightRequest="36" BackgroundColor="{DynamicResource SurfaceSubtle}"
-                                StrokeThickness="0" StrokeShape="RoundRectangle 11">
-                            <Label Text="M" FontSize="19" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
-                                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                        </Border>
-                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
-                            <Label Text="1. Conta do aplicativo" FontSize="13" FontAttributes="Bold" />
-                            <Label Text="Entre com sua conta Microsoft" FontSize="10"
-                                   TextColor="{DynamicResource TextSecondary}" />
-                        </VerticalStackLayout>
-                        <Label Grid.Column="2" Text="PENDENTE" FontSize="8" FontAttributes="Bold"
-                               TextColor="{DynamicResource Warning}" VerticalTextAlignment="Center" />
-                    </Grid>
-                    <Label Text="A Microsoft identifica sua conta Agent. O aplicativo foi planejado para usuários com contas Microsoft pessoais ou corporativas, conforme o registro de identidade." 
-                           FontSize="10" TextColor="{DynamicResource TextSecondary}" />
-                    <Button Text="Continuar com Microsoft" IsEnabled="False"
-                            BackgroundColor="{DynamicResource AccentStrong}" />
-                    <Label Text="O serviço de contas e a API já existem; o vínculo com o cliente Android ainda está pendente." FontSize="9"
-                           TextColor="{DynamicResource TextMuted}" />
+            <Border Padding="15" BackgroundColor="{DynamicResource AccentSurface}"
+                    StrokeThickness="0" StrokeShape="RoundRectangle 16">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="O que está disponível agora" FontSize="13"
+                           FontAttributes="Bold" TextColor="{DynamicResource Accent}" />
+                    <Label Text="Você pode navegar pelas telas e avaliar o visual. Conversas, autenticação, plugins e execução de tarefas não estão ativos nesta build." 
+                           FontSize="11" LineHeight="1.25" />
                 </VerticalStackLayout>
             </Border>
 
-            <Border Padding="16" BackgroundColor="{DynamicResource Surface}" Stroke="{DynamicResource Border}"
-                    StrokeThickness="1" StrokeShape="RoundRectangle 18">
-                <VerticalStackLayout Spacing="9">
-                    <Grid ColumnDefinitions="38,*,Auto" ColumnSpacing="10">
-                        <Border WidthRequest="36" HeightRequest="36" BackgroundColor="{DynamicResource AccentSurface}"
-                                StrokeThickness="0" StrokeShape="RoundRectangle 11">
-                            <Label Text="C" FontSize="19" FontAttributes="Bold" TextColor="{DynamicResource Accent}"
-                                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
-                        </Border>
-                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
-                            <Label Text="2. Acesso ao Codex" FontSize="13" FontAttributes="Bold" />
-                            <Label Text="Conexão separada e obrigatória para usar IA" FontSize="10"
-                                   TextColor="{DynamicResource TextSecondary}" />
-                        </VerticalStackLayout>
-                        <Label Grid.Column="2" Text="OBRIGATÓRIO" FontSize="8" FontAttributes="Bold"
-                               TextColor="{DynamicResource Warning}" VerticalTextAlignment="Center" />
-                    </Grid>
-                    <Label Text="Depois da conta Microsoft, você também precisa conectar sua própria conta Codex. Um login não substitui o outro." 
-                           FontSize="10" TextColor="{DynamicResource TextSecondary}" />
-                    <Label Text="O fluxo Codex será habilitado após validar a autorização oficialmente suportada para a distribuição pública." 
-                           FontSize="9" TextColor="{DynamicResource TextMuted}" />
-                </VerticalStackLayout>
-            </Border>
-
-            <Border Padding="13" BackgroundColor="{DynamicResource AccentSurface}" StrokeThickness="0"
-                    StrokeShape="RoundRectangle 15">
-                <VerticalStackLayout Spacing="4">
-                    <Label Text="Uma IA, duas opções de trabalho" FontSize="12" FontAttributes="Bold"
-                           TextColor="{DynamicResource Accent}" />
-                    <Label Text="Use o Codex normalmente ou crie especialistas AiSTo opcionais para assuntos específicos. O AiSTo não substitui nem treina outro modelo." 
-                           FontSize="10" />
-                </VerticalStackLayout>
-            </Border>
-
-            <Button Text="Explorar a prévia do aplicativo" BackgroundColor="{DynamicResource SurfaceRaised}"
+            <Button Text="Explorar a prévia do aplicativo"
+                    BackgroundColor="{DynamicResource AccentStrong}"
+                    TextColor="White" HeightRequest="50"
                     Clicked="OnPreviewClicked" />
-            <Label Text="A prévia permite conhecer a interface. Chat, login e ferramentas ainda não executam operações reais." 
-                   FontSize="9" TextColor="{DynamicResource TextMuted}" HorizontalTextAlignment="Center" />
+            <Label Text="A prévia não envia mensagens nem altera arquivos ou repositórios."
+                   FontSize="10" TextColor="{DynamicResource TextMuted}"
+                   HorizontalTextAlignment="Center" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
