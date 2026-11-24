@@ -20,5 +20,7 @@ psql --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" --set ON_ERROR_STOP=1 \
 SELECT format('CREATE ROLE %I LOGIN PASSWORD %L INHERIT', :'app_user', :'app_password')
 WHERE NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = :'app_user')
 \gexec
+ALTER ROLE :"app_user" WITH LOGIN PASSWORD :'app_password'
+    INHERIT NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
 GRANT agent_runtime TO :"app_user";
 SQL
